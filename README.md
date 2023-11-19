@@ -68,13 +68,19 @@ The methods validate inputs and check boundaries before updating the display buf
 * r9.0 = ASCII character  
 
 <table>
-<tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R8.1</th><th>R8.0</th><th>R9.1</th><th>R9.0</th><th>Notes</th></tr>
+<tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R8.1</th><th>R8.0</th><th>R9.1</th><th>R9.0</th></tr>
+<tr><th colspan="7">Notes</th></tr>
 <tr><td>gfx_draw_pixel</td><td>y</td><td>x</td><td colspan="2"> - </td><td>color</td><td> - </td><td>Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
-<tr><td>gfx_draw_line</td><td>origin y</td><td> origin x</td><td>endpoint y</td><td>endpoint x</td><td>color</td><td> - </td><td>Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
-<tr><td>gfx_draw_rect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td> - </td><td>Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
-<tr><td>gfx_fill_rect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td> - </td><td>Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
-<tr><td>gfx_draw_bitmap</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td> - </td><td>Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
-<tr><td>gfx_draw_char</td><td>origin y</td><td>origin x</td><th colspan="2">-</th><td>color</td><td>character</td><td>Checks origin x,y values, returns error (DF = 1) if out of bounds.</td><tr><tr><td colspan="8">Checks ASCII character value, draws DEL (127) if non-printable.<br> Returns: r7 points to next character position (text wraps).</td></tr>
+<tr><td>gfx_draw_line</td><td>origin y</td><td> origin x</td><td>endpoint y</td><td>endpoint x</td><td>color</td><td> - </td><td></tr>
+<tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
+<tr><td>gfx_draw_rect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td> - </td><td></tr>
+<tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
+<tr><td>gfx_fill_rect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td> - </td><td></tr>
+<tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
+<tr><td>gfx_draw_bitmap</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td> - </td><td></tr>
+<tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
+<tr><td>gfx_draw_char</td><td>origin y</td><td>origin x</td><th colspan="2">-</th><td>color</td><td>character</td></tr>
+<tr><td colspan="7"><td>Checks origin x,y values, returns error (DF = 1) if out of bounds.<br>Checks ASCII character value, draws DEL (127) if non-printable.<br> Returns: r7 points to next character position (text wraps).</td></tr>
 </table>
 
 
@@ -101,3 +107,26 @@ The methods write directly to the display buffer. They may not validate inputs o
 * r8.0 = endpoint x, or width
 * r9.1 = color
 * r9.0 = ASCII character or steep flag  
+
+## Notes: ##
+Public Gfx API call one or more private Gfx API which, in turn, call one or more of the Gfx Interface methods. The table below lists the Private API and the Gfx Interface methods they call.
+
+<table>
+<tr><th>Private API</th><th>Gfx Interface Methods Called</th></tr>
+<tr><td>gfx_check_bounds</td><td rowspan="3">gfx_disp_size</td></tr>
+<tr><td>gfx_adj_bounds</td></tr>
+<tr><td>gfx_check_overlap</td>
+<tr><td>gfx_write_pixel</td><td rowspan="4">gfx_disp_pixel</td></tr>
+<tr><td>gfx_write_bitmap</td></tr>
+<tr><td>gfx_write_char</td></tr>
+<tr><td>gfx_write_s_line</td></tr>
+<tr><td rowspan="2">gfx_write_rect</td><td>gfx_disp_h_line</td></tr>
+<tr><td>gfx_disp_v_line</td></tr>
+<tr><td rowspan="2">gfx_write_block</td><td>gfx_disp_h_line</td></tr>
+<tr><td>gfx_disp_v_line</td></tr>
+<tr><td rowspan="3">gfx_write_line</td><td>gfx_disp_h_line</td></tr>
+<tr><td>gfx_disp_v_line</td></tr>
+<tr><td>gfx_disp_pixel</td></tr>
+<tr><td>gfx_steep_flag</td><td rowspan="2">(None)</td></tr>
+<tr><td>gfx_ascii_font</td></tr>
+</table>
