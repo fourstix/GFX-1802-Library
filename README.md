@@ -38,8 +38,8 @@ The following methods need to be implemented in a device library that is linked 
 <tr><th>Name</th><th colspan="4"></th><th>Returns</th></tr>
 <tr><td rowspan="2">gfx_disp_size</th><td rowspan="2" colspan="4">(No Inputs)</td><td>RA.1 = device height</td></tr>
 <tr><td>RA.0 = display width</td></tr>
-<tr><td>gfx_disp_clear</th><td colspan="4">(No Inputs)</td><td>(None)</td></tr>
-<tr><td>gfx_disp_update</th><td colspan="4">(No Inputs)</td><td>(None)</td></tr>
+<tr><td>gfx_disp_clear</th><td colspan="4">(No Inputs)</td><td>(Display cleared)</td></tr>
+<tr><td>gfx_disp_update</th><td colspan="4">(No Inputs)</td><td>(Display updated)</td></tr>
 <tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R9.1</th><th>R9.0</th><th>Returns</th></tr>
 <tr><td>gfx_disp_pixel</td><td>y</td><td>x</td><td>color</td><td> - </td><td>DF = 1, if error</td></tr>
 <tr><td>gfx_disp_h_line</td><td>origin y</td><td>origin x</td><td>color</td><td>length</td><td>DF = 1, if error</td></tr>
@@ -68,7 +68,7 @@ The methods validate inputs and check boundaries before updating the display buf
 * r9.0 = ASCII character  
 
 <table>
-<tr><th>Name</th><tr><th>R7.1</th><th>R7.0</th><th>R8.1</th><th>R8.0</th><th>R9.1</th><th>R9.0</th><th>Notes</th></tr>
+<tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R8.1</th><th>R8.0</th><th>R9.1</th><th>R9.0</th><th>Notes</th></tr>
 <tr><td>gfx_draw_pixel</td><td>y</td><td>x</td><td colspan="2"> - </td><td>color</td><td> - </td><td>Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
 <tr><td>gfx_draw_line</td><td>origin y</td><td> origin x</td><td>endpoint y</td><td>endpoint x</td><td>color</td><td> - </td><td>Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
 <tr><td>gfx_draw_rect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td> - </td><td>Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
