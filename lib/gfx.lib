@@ -1,0 +1,284 @@
+.big
+{gfx_check_bounds
+/gfx_disp_size 0005 00
+\gfx_disp_size 0006
+:0000 9a 73 8a 73 d4 00 00 97 52 9a f5 c3 00 12 87 52
+:0010 8a f5 60 72 aa f0 ba d5
++000c
+}
+.big
+{gfx_adj_bounds
+/gfx_disp_size 0005 00
+\gfx_disp_size 0006
+:0000 9a 73 8a 73 d4 00 00 98 c2 00 49 52 9a f7 cb 00
+:0010 49 98 ff 01 b8 97 52 98 f4 52 9a f7 c3 00 28 fc
+:0020 01 52 98 f7 b8 cb 00 49 88 c2 00 49 52 8a f7 cb
+:0030 00 49 88 ff 01 a8 87 52 88 f4 52 8a f7 c3 00 4e
+:0040 fc 01 52 88 f7 a8 c3 00 4e ff 00 c0 00 50 fc 00
+:0050 60 72 aa f0 ba d5
++0009
++000f
++001d
++0026
++002a
++0030
++003e
++0047
++004c
+}
+.big
+{gfx_check_overlap
+/gfx_disp_size 0005 00
+\gfx_disp_size 0006
+:0000 9a 73 8a 73 d4 00 00 87 52 8a f5 c3 00 1f 97 52
+:0010 9a f5 cb 00 3f 97 52 98 f4 52 9a f5 cb 00 3f 87
+:0020 52 88 f4 52 8a f5 c3 00 3a 97 52 9a f5 cb 00 3f
+:0030 97 52 98 f4 52 9a f5 cb 00 3f ff 00 c0 00 41 fc
+:0040 00 60 72 aa f0 ba d5
++000c
++0013
++001d
++0027
++002e
++0038
++003d
+}
+.big
+{gfx_draw_pixel
+/gfx_check_bounds 0001 00
+\gfx_check_bounds 0002
+/gfx_disp_pixel 0007 00
+\gfx_disp_pixel 0008
+:0000 d4 00 00 c3 00 09 d4 00 00 d5
++0004
+}
+.big
+{gfx_write_bitmap
+:0000 9b 73 8b 73 9a 73 8a 73 87 a9 98 aa 88 ab 4f bb
+/gfx_check_bounds 0017 00
+\gfx_check_bounds 0018
+/gfx_disp_pixel 001d 00
+\gfx_disp_pixel 001e
+:0010 9b fe bb cb 00 1f d4 00 00 c3 00 1f d4 00 00 2b
+:0020 87 fc 01 a7 8b ca 00 10 97 fc 01 b7 89 a7 2a 8a
+:0030 ca 00 0c 60 72 aa f0 ba 60 72 ab f0 bb d5
++0014
++001a
++0026
++0031
+}
+.big
+{gfx_draw_bitmap
+/gfx_check_overlap 0001 00
+\gfx_check_overlap 0002
+:0000 d4 00 00 cb 00 09 fc 00 d5 9f 73 8f 73 99 73 89
+/gfx_write_bitmap 0016 00
+\gfx_write_bitmap 0017
+:0010 73 97 73 87 73 d4 00 00 60 72 a7 f0 b7 60 72 a9
+:0020 f0 b9 60 72 af f0 bf d5
++0004
+}
+.big
+{gfx_ascii_font
+:0000 00 00 00 00 00 00 00 5f 00 00 00 07 00 07 00 14
+:0010 7f 14 7f 14 24 2a 7f 2a 12 23 13 08 64 62 36 49
+:0020 55 22 50 00 05 03 00 00 00 1c 22 41 00 00 41 22
+:0030 1c 00 14 08 3e 08 14 08 08 3e 08 08 00 50 30 00
+:0040 00 08 08 08 08 08 00 60 60 00 00 20 10 08 04 02
+:0050 3e 51 49 45 3e 00 42 7f 40 00 42 61 51 49 46 21
+:0060 41 45 4b 31 18 14 12 7f 10 27 45 45 45 39 3c 4a
+:0070 49 49 30 01 71 09 05 03 36 49 49 49 36 06 49 49
+:0080 29 1e 00 36 36 00 00 00 56 36 00 00 08 14 22 41
+:0090 00 14 14 14 14 14 00 41 22 14 08 02 01 51 09 06
+:00a0 32 49 79 41 3e 7e 11 11 11 7e 7f 49 49 49 36 3e
+:00b0 41 41 41 22 7f 41 41 22 1c 7f 49 49 49 41 7f 09
+:00c0 09 09 01 3e 41 49 49 7a 7f 08 08 08 7f 00 41 7f
+:00d0 41 00 20 40 41 3f 01 7f 08 14 22 41 7f 40 40 40
+:00e0 40 7f 02 0c 02 7f 7f 04 08 10 7f 3e 41 41 41 3e
+:00f0 7f 09 09 09 06 3e 41 51 21 5e 7f 09 19 29 46 46
+:0100 49 49 49 31 01 01 7f 01 01 3f 40 40 40 3f 1f 20
+:0110 40 20 1f 3f 40 38 40 3f 63 14 08 14 63 07 08 70
+:0120 08 07 61 51 49 45 43 00 7f 41 41 00 02 04 08 10
+:0130 20 00 41 41 7f 00 04 02 01 02 04 40 40 40 40 40
+:0140 00 01 02 04 00 20 54 54 54 78 7f 48 44 44 38 38
+:0150 44 44 44 20 38 44 44 48 7f 38 54 54 54 18 08 7e
+:0160 09 01 02 0c 52 52 52 3e 7f 08 04 04 78 00 44 7d
+:0170 40 00 20 40 44 3d 00 7f 10 28 44 00 00 41 7f 40
+:0180 00 7c 04 18 04 78 7c 08 04 04 78 38 44 44 44 38
+:0190 7c 14 14 14 08 08 14 14 18 7c 7c 08 04 04 08 48
+:01a0 54 54 54 20 04 3f 44 40 20 3c 40 40 20 7c 1c 20
+:01b0 40 20 1c 3c 40 30 40 3c 44 28 10 28 44 0c 50 50
+:01c0 50 3c 44 64 54 4c 44 00 08 36 41 00 00 00 7f 00
+:01d0 00 00 41 36 08 00 10 08 08 10 08 00 3c 3c 3c 00
+}
+.big
+{gfx_write_char
+\gfx_ascii_font 0009
+/gfx_ascii_font 000c 00
+:0000 9f 73 8f 73 9c 73 8c 73 f8 00 af f8 00 bf f8 00
+:0010 b8 89 fa 80 c2 00 1c f8 5f c0 00 24 89 ff 20 c3
+:0020 00 24 f8 00 a8 ac 88 fe a8 98 7e b8 88 fe a8 98
+:0030 7e b8 8c 52 88 f4 a8 98 7c 00 b8 88 52 8f f4 af
+:0040 98 52 9f 74 bf f8 05 ac 97 b8 8c c2 00 78 4f bc
+/gfx_check_bounds 005e 00
+\gfx_check_bounds 005f
+:0050 f8 08 a8 88 c2 00 6e 9c f6 bc cb 00 66 d4 00 00
+/gfx_disp_pixel 0064 00
+\gfx_disp_pixel 0065
+:0060 c3 00 66 d4 00 00 28 97 fc 01 b7 c0 00 53 98 b7
+:0070 87 fc 01 a7 2c c0 00 4a 60 72 ac f0 bc 60 72 af
+:0080 f0 bf fc 00 d5
++0015
++001a
++0020
++004c
++0055
++005b
++0061
++006c
++0076
+}
+.big
+{gfx_draw_char
+/gfx_write_char 0009 00
+\gfx_write_char 000a
+:0000 99 73 89 73 98 73 88 73 d4 00 00 60 72 a8 f0 b8
+:0010 60 72 a9 f0 b9 d5
+}
+.big
+{gfx_write_rect
+:0000 9b 73 8b 73 9a 73 8a 73 87 aa 97 ba 88 ab 98 bb
+/gfx_disp_h_line 0013 00
+\gfx_disp_h_line 0014
+:0010 88 a9 d4 00 00 c3 00 4b 8a a7 9a b7 8b a8 9b b8
+/gfx_disp_v_line 0023 00
+\gfx_disp_v_line 0024
+:0020 98 a9 d4 00 00 c3 00 4b 8b a8 9b b8 8a a7 9a 52
+/gfx_disp_h_line 0036 00
+\gfx_disp_h_line 0037
+:0030 98 f4 b7 88 a9 d4 00 00 c3 00 4b 8b a8 9b b8 9a
+/gfx_disp_v_line 0049 00
+\gfx_disp_v_line 004a
+:0040 b7 8a 52 88 f4 a7 98 a9 d4 00 00 60 72 aa f0 ba
+:0050 60 72 ab f0 bb d5
++0016
++0026
++0039
+}
+.big
+{gfx_write_block
+:0000 9a 73 8a 73 9c 73 8c 73 87 aa 97 ba f8 00 ac f8
+/gfx_disp_v_line 0018 00
+\gfx_disp_v_line 0019
+:0010 00 bc 88 ac 1c 98 a9 d4 00 00 c3 00 29 1a 2c 98
+:0020 a9 8a a7 9a b7 8c ca 00 17 60 72 aa f0 ba 60 72
+:0030 ac f0 bc d5
++001b
++0027
+}
+.big
+{gfx_draw_rect
+/gfx_check_bounds 0001 00
+\gfx_check_bounds 0002
+:0000 d4 00 00 c3 00 2a 99 73 89 73 98 73 88 73 97 73
+/gfx_adj_bounds 0013 00
+\gfx_adj_bounds 0014
+/gfx_write_rect 0019 00
+\gfx_write_rect 001a
+:0010 87 73 d4 00 00 c3 00 1b d4 00 00 60 72 a7 f0 b7
+:0020 60 72 a8 f0 b8 60 72 a9 f0 b9 d5
++0004
++0016
+}
+.big
+{gfx_fill_rect
+/gfx_check_bounds 0001 00
+\gfx_check_bounds 0002
+:0000 d4 00 00 c3 00 2a 99 73 89 73 98 73 88 73 97 73
+/gfx_adj_bounds 0013 00
+\gfx_adj_bounds 0014
+/gfx_write_block 0019 00
+\gfx_write_block 001a
+:0010 87 73 d4 00 00 c3 00 1b d4 00 00 60 72 a7 f0 b7
+:0020 60 72 a8 f0 b8 60 72 a9 f0 b9 d5
++0004
++0016
+}
+.big
+{gfx_write_s_line
+:0000 9a 73 8a 73 9b 73 8b 73 9c 73 8c 73 87 aa 97 ba
+:0010 8a 52 88 f7 ab 9a 52 98 f7 bb c3 00 27 9b fd 00
+:0020 bb f8 ff bc c0 00 2a f8 01 bc 8b f6 ac 88 52 8a
+/gfx_disp_pixel 003d 00
+\gfx_disp_pixel 003e
+:0030 f7 c3 00 5f 89 ca 00 42 8a a7 9a b7 d4 00 00 c0
+/gfx_disp_pixel 0047 00
+\gfx_disp_pixel 0048
+:0040 00 49 8a b7 9a a7 d4 00 00 9b 52 8c f7 ac c3 00
+:0050 5b 9c 52 9a f4 ba 8b 52 8c f4 ac 1a c0 00 2d 89
+/gfx_disp_pixel 006f 00
+:0060 ca 00 6a 8a a7 9a b7 c0 00 6e 88 b7 98 a7 d4 00
+\gfx_disp_pixel 0070
+:0070 00 60 72 aa f0 ba 60 72 ab f0 bb 60 72 ac f0 bc
+:0080 d5
++001b
++0025
++0032
++0036
++0040
++004f
++005d
++0061
++0068
+}
+.big
+{gfx_write_line
+:0000 97 52 98 f5 ca 00 25 87 52 88 f7 a9 c3 00 1f 89
+:0010 fd 00 a9 87 52 88 a7 f0 a8 97 52 98 b7 f0 b8 d4
+/gfx_disp_h_line 0020 00
+\gfx_disp_h_line 0021
+:0020 00 00 c0 00 73 87 52 88 f7 ca 00 4a 97 52 98 f7
+:0030 a9 c3 00 44 89 fd 00 a9 87 52 88 a7 f0 a8 97 52
+/gfx_disp_v_line 0045 00
+\gfx_disp_v_line 0046
+/gfx_steep_flag 004b 00
+\gfx_steep_flag 004c
+:0040 98 b7 f0 b8 d4 00 00 c0 00 73 d4 00 00 89 c2 00
+:0050 5d 87 52 97 a7 f0 b7 88 52 98 a8 f0 b8 87 52 88
+:0060 f7 c3 00 70 87 52 88 a7 f0 a8 97 52 98 b7 f0 b8
+/gfx_write_s_line 0071 00
+\gfx_write_s_line 0072
+:0070 d4 00 00 fc 00 d5
++0005
++000d
++0023
++002a
++0032
++0048
++004f
++0062
+}
+.big
+{gfx_steep_flag
+:0000 9a 73 8a 73 87 52 88 f7 aa c3 00 0f fd 00 aa 97
+:0010 52 98 f7 ba c3 00 1a fd 00 ba 8a 52 9a f7 c3 00
+:0020 24 f8 00 c8 f8 01 a9 60 72 aa f0 ba d5
++000a
++0015
++001f
+}
+.big
+{gfx_draw_line
+/gfx_check_bounds 0001 00
+\gfx_check_bounds 0002
+/gfx_check_bounds 000f 00
+:0000 d4 00 00 c3 00 37 97 73 87 73 88 a7 98 b7 d4 00
+\gfx_check_bounds 0010
+:0010 00 60 72 a7 f0 b7 c3 00 37 99 73 89 73 98 73 88
+/gfx_write_line 0026 00
+\gfx_write_line 0027
+:0020 73 97 73 87 73 d4 00 00 60 72 a7 f0 b7 60 72 a8
+:0030 f0 b8 60 72 a9 f0 b9 d5
++0004
++0017
+}

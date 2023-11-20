@@ -16,7 +16,7 @@ Supported Displays
 Gfx Display Interface
 ---------------------
 
-## GFX Display Interface API 
+## GFX Display Interface
 The following methods need to be implemented in a device library that is linked to this library.  These methods are called by the GFX API methods and they encapsulate the device specific details. 
 
 * gfx_disp_size   - return the height and width of the display.
@@ -121,13 +121,11 @@ Public Gfx API call one or more private Gfx API which, in turn, call one or more
 <tr><td>gfx_write_bitmap</td></tr>
 <tr><td>gfx_write_char</td></tr>
 <tr><td>gfx_write_s_line</td></tr>
+<tr><td>gfx_write_block</td><td>gfx_disp_v_line</td></tr>
 <tr><td rowspan="2">gfx_write_rect</td><td>gfx_disp_h_line</td></tr>
 <tr><td>gfx_disp_v_line</td></tr>
-<tr><td rowspan="2">gfx_write_block</td><td>gfx_disp_h_line</td></tr>
+<tr><td rowspan="2">gfx_write_line</td><td>gfx_disp_h_line</td></tr>
 <tr><td>gfx_disp_v_line</td></tr>
-<tr><td rowspan="3">gfx_write_line</td><td>gfx_disp_h_line</td></tr>
-<tr><td>gfx_disp_v_line</td></tr>
-<tr><td>gfx_disp_pixel</td></tr>
 <tr><td>gfx_steep_flag</td><td rowspan="2">(None)</td></tr>
 <tr><td>gfx_ascii_font</td></tr>
 </table>
