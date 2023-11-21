@@ -7,16 +7,14 @@ This repository contains 1802 Assembler code for a core graphics library based o
 
 Assembler and Linker  
 --------------------
-These programs were assembled and linked with updated versions of the Asm-02 assembler and Link-02 linker by Mike Riley and updated by Tony Hefner. The updated versions required to assemble and link this code are available at [fourstix/Asm-02](https://github.com/fourstix/Asm-02) and [fourstix/Link-02](https://github.com/fourstic/Link-02).
+These programs were assembled and linked with updated versions of the Asm-02 assembler and Link-02 linker by Mike Riley and updated by Tony Hefner. The updated versions required to assemble and link this code are available at [fourstix/Asm-02](https://github.com/fourstix/Asm-02) and [fourstix/Link-02](https://github.com/fourstix/Link-02).
 
 Supported Displays
 ------------------
-**TBD**
+* [Adafruit 8x8 BiColor LED Matrix](https://github.com/fourstix/Elfos-I2C-Libraries/tree/b_build_3#gfx-1802-library)
 
-Gfx Display Interface
+GFX Display Interface
 ---------------------
-
-## GFX Display Interface
 The following methods need to be implemented in a device library that is linked to this library.  These methods are called by the GFX API methods and they encapsulate the device specific details. 
 
 * gfx_disp_size   - return the height and width of the display.
@@ -26,7 +24,7 @@ The following methods need to be implemented in a device library that is linked 
 * gfx_disp_h_line - set the data in the memory buffer for a horizontal line.
 * gfx_disp_v_line - set the data in the memory buffer for a vertical line
 
-## API Registers:
+## Interface Registers:
 * ra.1 = display height 
 * ra.0 = display width
 * r9.1 = color
@@ -129,3 +127,84 @@ Public Gfx API call one or more private Gfx API which, in turn, call one or more
 <tr><td>gfx_steep_flag</td><td rowspan="2">(None)</td></tr>
 <tr><td>gfx_ascii_font</td></tr>
 </table>
+
+Repository Contents
+-------------------
+* **/src/**  -- Source files for the GFX 1802 Graphics library.
+  * *.asm - Assembly source files for library functions.
+  * gfx_build.bat - Windows batch file to assemble and create the gfx graphics library. Replace [Your_Path] with the correct path information for your system. 
+  * clean.bat - Windows batch file to delete the gfx library and its associated files.    
+* **/lib/**  -- Library file for the GFX 1802 graphics routines.
+  * gfx.lib - Assembled Graphics 1802 library. The source files for library functions are in the */src/* directory.
+* **/include/**  -- Include files for the GFX 1802 Graphics library.  
+  * gfx_lib.inc - External definitions for the Graphics 1802 Library public API.
+  * gfx_display.inc - GFX Display interface definitions required to support the GFX 1802 graphics library functions in a device library.
+  * gfx_def.inc - Definitions for internal API methods used by other GFX functions.
+  * ops.inc - Opcode definitions for Asm/02.
+  
+License Information
+-------------------
+
+This code is public domain under the MIT License, but please buy me a beverage
+if you use this and we meet someday (Beerware).
+
+References to any products, programs or services do not imply
+that they will be available in all countries in which their respective owner operates.
+
+Adafruit, the Adafruit logo, and other Adafruit products and services are
+trademarks of the Adafruit Industries, in the United States, other countries or both. 
+
+Any company, product, or services names may be trademarks or services marks of others.
+
+All libraries used in this code are copyright their respective authors.
+
+This code is based on code written by Tony Hefner and assembled with the Asm/02 assembler and Link/02 linker written by Mike Riley.
+
+Elf/OS  
+Copyright (c) 2004-2023 by Mike Riley
+
+Asm/02 1802 Assembler  
+Copyright (c) 2004-2023 by Mike Riley
+
+Link/02 1802 Linker  
+Copyright (c) 2004-2023 by Mike Riley
+
+The Adafruit_GFX Library  
+Copyright (c) 2012-2023 by Adafruit Industries   
+Written by Limor Fried/Ladyada for Adafruit Industries. 
+
+The 1802/Mini SPI Adapter Board   
+Copyright (c) 2022-2023 by Tony Hefner
+
+The 1802/Mini PIO Parallel Expansion Board   
+Copyright (c) 2022-2023 by Tony Hefner
+
+The 1802/Mini I2C Adapter Board   
+Copyright (c) 2022-2023 by Tony Hefner
+
+The 1802-Mini Microcomputer Hardware   
+Copyright (c) 2020-2023 by David Madole
+
+Many thanks to the original authors for making their designs and code available as open source.
+ 
+This code, firmware, and software is released under the [MIT License](http://opensource.org/licenses/MIT).
+
+The MIT License (MIT)
+
+Copyright (c) 2023 by Gaston Williams
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+**THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.**
