@@ -11,15 +11,14 @@ These programs were assembled and linked with updated versions of the Asm-02 ass
 
 Supported Displays
 ------------------
-* [Adafruit 8x8 BiColor LED Matrix](https://github.com/fourstix/Elfos-I2C-Libraries/tree/b_build_3#gfx-1802-library)
+* [Adafruit 8x8 BiColor LED Matrix](https://github.com/fourstix/Elfos-I2C-Libraries/tree/main#gfx-1802-library)
 
 GFX Display Interface
 ---------------------
 The following methods need to be implemented in a device library that is linked to this library.  These methods are called by the GFX API methods and they encapsulate the device specific details. 
 
 * gfx_disp_size   - return the height and width of the display.
-* gfx_disp_clear  - set the memory buffer data to clear all pixels in the display.
-* gfx_disp_update - write the memory buffer to the display to update the display.
+* gfx_disp_clear  - set the memory buffer data to clear all pixels.
 * gfx_disp_pixel  - set the data in the memory buffer corresponding to a particular x,y co-ordinates in the display.
 * gfx_disp_h_line - set the data in the memory buffer for a horizontal line.
 * gfx_disp_v_line - set the data in the memory buffer for a vertical line
@@ -37,7 +36,6 @@ The following methods need to be implemented in a device library that is linked 
 <tr><td rowspan="2">gfx_disp_size</th><td rowspan="2" colspan="4">(No Inputs)</td><td>RA.1 = device height</td></tr>
 <tr><td>RA.0 = display width</td></tr>
 <tr><td>gfx_disp_clear</th><td colspan="4">(No Inputs)</td><td>(Display cleared)</td></tr>
-<tr><td>gfx_disp_update</th><td colspan="4">(No Inputs)</td><td>(Display updated)</td></tr>
 <tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R9.1</th><th>R9.0</th><th>Returns</th></tr>
 <tr><td>gfx_disp_pixel</td><td>y</td><td>x</td><td>color</td><td> - </td><td>DF = 1, if error</td></tr>
 <tr><td>gfx_disp_h_line</td><td>origin y</td><td>origin x</td><td>color</td><td>length</td><td>DF = 1, if error</td></tr>
