@@ -35,7 +35,7 @@ The following methods need to be implemented in a device library that is linked 
 <tr><th>Name</th><th colspan="4"></th><th>Returns</th></tr>
 <tr><td rowspan="2">gfx_disp_size</th><td rowspan="2" colspan="4">(No Inputs)</td><td>RA.1 = device height</td></tr>
 <tr><td>RA.0 = display width</td></tr>
-<tr><td>gfx_disp_clear</th><td colspan="4">(No Inputs)</td><td>(Display cleared)</td></tr>
+<tr><td>gfx_disp_clear</th><td colspan="4">(No Inputs)</td><td>DF = 1, if error</td></tr>
 <tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R9.1</th><th>R9.0</th><th>Returns</th></tr>
 <tr><td>gfx_disp_pixel</td><td>y</td><td>x</td><td>color</td><td> - </td><td>DF = 1, if error</td></tr>
 <tr><td>gfx_disp_h_line</td><td>origin y</td><td>origin x</td><td>color</td><td>length</td><td>DF = 1, if error</td></tr>
