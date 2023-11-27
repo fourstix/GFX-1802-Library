@@ -11,7 +11,7 @@ These programs were assembled and linked with updated versions of the Asm-02 ass
 
 Supported Displays
 ------------------
-* [Adafruit 8x8 BiColor LED Matrix](https://github.com/fourstix/Elfos-I2C-Libraries/tree/main#gfx-1802-library)
+* [Adafruit 8x8 BiColor LED Matrix](https://github.com/fourstix/Elfos-I2C-Libraries/tree/main#example-program-7)
 
 GFX Display Interface
 ---------------------
