@@ -8,18 +8,10 @@
 ; Copyright 2012 by Adafruit Industries
 ; Please see https://learn.adafruit.com/adafruit-gfx-graphics-library for more info
 ;-------------------------------------------------------------------------------
-
 #include    ../include/ops.inc
 #include    ../include/gfx_display.inc
 #include    ../include/gfx_def.inc  
   
-
-;-------------------------------------------------------
-; Private routine - called only by the public routines
-; These routines may *not* validate or clip. They may 
-; also consume register values passed to them.
-;-------------------------------------------------------
-
 ;-------------------------------------------------------
 ; Name: gfx_adj_bounds
 ;
@@ -37,7 +29,8 @@
 ;   ra.1 - device height
 ;   ra.0 - device width
 ;
-; Returns: DF = 1 if error, 0 if no error
+; Returns: 
+;   DF = 1 if error, 0 if no error
 ;   r8.1 - h' = h-1, adjusted so that 0 <= y0 + h' <= height 
 ;   r8.0 - w' = w-1, adjusted so that 0 <= x0 + w' <= width
 ;

@@ -39,8 +39,8 @@
 ;-------------------------------------------------------
             proc    gfx_write_block
 
-            push    ra        ; save origin registers
             push    rc        ; save counter register
+            push    ra        ; save origin registers
             
             copy    r7, ra    ; save origin
             load    rc, 0     ; clear rc        
@@ -62,7 +62,8 @@ wb_loop:    call    gfx_disp_v_line
             ghi     r8        ; get h for length
             plo     r9        ; set up length of vertical line
             
-            COPY    ra, r7    ; put new origin for next line
+            copy    ra, r7    ; put new origin for next line
+            
             glo     rc        ; check counter
             lbnz    wb_loop   ; keep drawing columns until filled
             

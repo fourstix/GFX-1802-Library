@@ -12,7 +12,6 @@
 ;-------------------------------------------------------------------------------
 ; Character constants
 ;-------------------------------------------------------------------------------
-
 #define C_OFFSET     32
 #define C_COUNT      96
 #define C_ERROR      95
@@ -34,3 +33,5 @@
             extrn   gfx_write_s_line 
             extrn   gfx_steep_flag 
             extrn   gfx_write_line 
+            extrn   gfx_check_cursor
+            extrn   gfx_adj_cursor
