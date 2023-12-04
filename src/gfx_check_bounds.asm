@@ -19,8 +19,8 @@
 ; are inside of the display boundaries.
 ;
 ; Parameters: 
-;   r7.1 - y (display line, 0 to 7)
-;   r7.0 - x (pixel offset, 0 to 7)
+;   r7.1 - y
+;   r7.0 - x 
 ;
 ; Registers Used:
 ;   ra.1 - device height
