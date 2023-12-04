@@ -73,7 +73,7 @@ The methods validate inputs and check boundaries before updating the display buf
 <tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R8.1</th><th>R8.0</th><th>R9.1</th><th>R9.0</th></tr>
 <tr><th colspan="7">Notes</th></tr>
 <tr><td>gfx_draw_pixel</td><td>y</td><td>x</td><td> - </td><td> - </td><td>color</td><td> - </td></tr>
-<tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
+<tr><td colspan="7">Checks x,y values, returns error (DF = 1) if </td></tr>
 <tr><td>gfx_draw_line</td><td>origin y</td><td> origin x</td><td>endpoint y</td><td>endpoint x</td><td>color</td><td> - </td></tr>
 <tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
 <tr><td>gfx_draw_rect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td> - </td></tr>
@@ -87,9 +87,9 @@ The methods validate inputs and check boundaries before updating the display buf
 <tr><td>gfx_check_bounds</td><td>origin y</td><td> origin x</td><td> - </td><td> - </td><td> - </td><td> - </td></tr>
 <tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
 <tr><td>gfx_adj_bounds</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
-<tr><td colspan="7">Checks origin x + width, origin y + height values. The w and h values may be clipped to edge of display. Returns error (DF = 1) if error.</td></tr>
+<tr><td colspan="7">Checks origin x, y, width and height values. The values may be clipped to the edges of display. Returns error (DF = 1) if clipping fails.</td></tr>
 <tr><td>gfx_check_overlap</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td> - </td></tr>
-<tr><td colspan="7">Checks origin x,y values, height and width to determine if a bitmap overlaps the display, returns error (DF = 1) if out of bounds.</td></tr>
+<tr><td colspan="7">Checks origin x,y values, height and width to determine if a graphic overlaps the display, returns error (DF = 1) if no overlap.</td></tr>
 <tr><td>gfx_adj_cursor</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
 <tr><td colspan="7">Checks origin x,y values to validate a character can be drawn on the display. The x and y values may be adjusted so the cursor wraps to the next character position.</td></tr>
 </table>
