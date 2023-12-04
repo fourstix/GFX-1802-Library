@@ -12,9 +12,9 @@ These programs were assembled and linked with updated versions of the Asm-02 ass
 Supported Displays
 ------------------
 * [Adafruit 8x8 BiColor LED Matrix](https://github.com/fourstix/Elfos-I2C-Libraries/tree/main#example-program-7)
-* SH1106 OLED
-* SSD1306 OLED
-* SSD1309 OLED
+* [SH1106 OLED display](https://github.com/fourstix/Elfos-SPI-OLED-Drivers#sh1106-display-pinout)
+* [SSD1306 OLED display](https://github.com/fourstix/Elfos-SPI-OLED-Drivers#ssd1306-display-pinout)
+* [SSD1309 OLED display](https://github.com/fourstix/Elfos-SPI-OLED-Drivers#ssd1309-display-pinout)
 
 GFX Display Interface
 ---------------------
