@@ -3,7 +3,7 @@ A graphics library written in 1802 Assembler code based on the Adafruit_GFX-Libr
 
 Introduction
 ------------
-This repository contains 1802 Assembler code for a core graphics library based on Adafruit's [Adafruit_GFX-Library](https://github.com/adafruit/Adafruit-GFX-Library) written by Ladyada Limor Fried. 
+This repository contains 1802 Assembler code for a common graphics library based on Adafruit's [Adafruit_GFX-Library](https://github.com/adafruit/Adafruit-GFX-Library) written by Ladyada Limor Fried. 
 
 Assembler and Linker  
 --------------------
@@ -12,6 +12,9 @@ These programs were assembled and linked with updated versions of the Asm-02 ass
 Supported Displays
 ------------------
 * [Adafruit 8x8 BiColor LED Matrix](https://github.com/fourstix/Elfos-I2C-Libraries/tree/main#example-program-7)
+* SH1106 OLED
+* SSD1306 OLED
+* SSD1309 OLED
 
 GFX Display Interface
 ---------------------
@@ -91,7 +94,6 @@ The methods validate inputs and check boundaries before updating the display buf
 <tr><td colspan="7">Checks origin x,y values to validate a character can be drawn on the display. The x and y values may be adjusted so the cursor wraps to the next character position.</td></tr>
 </table>
 
-
 ## Private API List
 The methods write directly to the display buffer. They may not validate inputs or check boundaries.  They may consume registers and are meant to be called by one of the public API methods rather than called directly.
 
@@ -113,11 +115,11 @@ The methods write directly to the display buffer. They may not validate inputs o
 * r9.1 = color
 * r9.0 = ASCII character or steep flag  
 
-## Notes: ##
-Public Gfx API may call private Gfx API methods which, in turn, call one or more of the Gfx Interface methods. The table below lists the Gfx API methods and the Gfx Interface methods they call.
+## GFX API That Call GFX Interface Methods ##
+Public GFX API may call private GFX API methods which, in turn, call one or more of the GFX Interface methods. The table below lists the GFX API methods and the GFX Interface methods they call.
 
 <table>
-<tr><th>Gfx API</th><th>Gfx Interface Methods Called</th></tr>
+<tr><th>GFX API</th><th>GFX Interface Methods Called</th></tr>
 <tr><td>gfx_check_bounds</td><td rowspan="4">gfx_disp_size</td></tr>
 <tr><td>gfx_adj_bounds</td></tr>
 <tr><td>gfx_check_overlap</td>
@@ -131,8 +133,6 @@ Public Gfx API may call private Gfx API methods which, in turn, call one or more
 <tr><td>gfx_disp_v_line</td></tr>
 <tr><td rowspan="2">gfx_write_line</td><td>gfx_disp_h_line</td></tr>
 <tr><td>gfx_disp_v_line</td></tr>
-<tr><td>gfx_steep_flag</td><td rowspan="2">(None)</td></tr>
-<tr><td>gfx_ascii_font</td></tr>
 </table>
 
 Repository Contents
