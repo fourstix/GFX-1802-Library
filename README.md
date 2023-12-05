@@ -3,7 +3,7 @@ A graphics library written in 1802 Assembler code based on the Adafruit_GFX-Libr
 
 Introduction
 ------------
-This repository contains 1802 Assembler code for a core graphics library based on Adafruit's [Adafruit_GFX-Library](https://github.com/adafruit/Adafruit-GFX-Library) written by Ladyada Limor Fried. 
+This repository contains 1802 Assembler code for a common graphics library based on Adafruit's [Adafruit_GFX-Library](https://github.com/adafruit/Adafruit-GFX-Library) written by Ladyada Limor Fried. 
 
 Assembler and Linker  
 --------------------
@@ -12,6 +12,9 @@ These programs were assembled and linked with updated versions of the Asm-02 ass
 Supported Displays
 ------------------
 * [Adafruit 8x8 BiColor LED Matrix](https://github.com/fourstix/Elfos-I2C-Libraries/tree/main#example-program-7)
+* [SH1106 OLED display](https://github.com/fourstix/Elfos-SPI-OLED-Drivers#sh1106-display-pinout)
+* [SSD1306 OLED display](https://github.com/fourstix/Elfos-SPI-OLED-Drivers#ssd1306-display-pinout)
+* [SSD1309 OLED display](https://github.com/fourstix/Elfos-SPI-OLED-Drivers#ssd1309-display-pinout)
 
 GFX Display Interface
 ---------------------
@@ -47,12 +50,16 @@ Graphics Library API
 ## Public API List
 The methods validate inputs and check boundaries before updating the display buffer.
 
-* gfx_draw_pixel   - set a pixel at a particular x,y co-ordinates.
-* gfx_draw_line    - set pixels to form a line from x0,y0 to x1,y1
-* gfx_draw_rect    - set pixels to form a rectangle with its upper left corner at x0,y0 with width w and height h.
-* gfx_fill_rect    - set pixels to form a filled rectangle with its upper left corner at x0,y0 with width w and height h.
-* gfx_draw_bitmap  - set pixels to draw a bitmap of width w and height h with its upper left corner at x0,y0.
-* gfx_draw_char    - draw a character at x0,y0
+* gfx_draw_pixel    - set a pixel at a particular x,y co-ordinates.
+* gfx_draw_line     - set pixels to form a line from x0,y0 to x1,y1
+* gfx_draw_rect     - set pixels to form a rectangle with its upper left corner at x0,y0 with width w and height h.
+* gfx_fill_rect     - set pixels to form a filled rectangle with its upper left corner at x0,y0 with width w and height h.
+* gfx_draw_bitmap   - set pixels to draw a bitmap of width w and height h with its upper left corner at x0,y0.
+* gfx_draw_char     - draw a character at x0,y0
+* gfx_check_bounds  - validate that x,y co-ordinates are within the display height and width.
+* gfx_adj_bounds    - adjust the x,y co-ordinates to remain within the display height and width.
+* gfx_check_overlap - validate that x,y co-ordinates and height and width are within the display height and width.
+* gfx_adj_cursor    - adjust the x,y co-ordinates, if needed, so the next character is drawn entirely within the display height and width.
 
 ## API Registers:
 * r7.1 = origin y (row value, 0 to device height-1)
@@ -66,7 +73,7 @@ The methods validate inputs and check boundaries before updating the display buf
 <tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R8.1</th><th>R8.0</th><th>R9.1</th><th>R9.0</th></tr>
 <tr><th colspan="7">Notes</th></tr>
 <tr><td>gfx_draw_pixel</td><td>y</td><td>x</td><td> - </td><td> - </td><td>color</td><td> - </td></tr>
-<tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
+<tr><td colspan="7">Checks x,y values, returns error (DF = 1) if </td></tr>
 <tr><td>gfx_draw_line</td><td>origin y</td><td> origin x</td><td>endpoint y</td><td>endpoint x</td><td>color</td><td> - </td></tr>
 <tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
 <tr><td>gfx_draw_rect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td> - </td></tr>
@@ -77,15 +84,19 @@ The methods validate inputs and check boundaries before updating the display buf
 <tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
 <tr><td>gfx_draw_char</td><td>origin y</td><td>origin x</td><td> - </td><td> - </td><td>color</td><td>character</td></tr>
 <tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. Checks ASCII character value, draws DEL (127) if non-printable.<br> Returns: r7 points to next character position.</td></tr>
+<tr><td>gfx_check_bounds</td><td>origin y</td><td> origin x</td><td> - </td><td> - </td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
+<tr><td>gfx_adj_bounds</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks origin x, y, width and height values. The values may be clipped to the edges of display. Returns error (DF = 1) if clipping fails.</td></tr>
+<tr><td>gfx_check_overlap</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td> - </td></tr>
+<tr><td colspan="7">Checks origin x,y values, height and width to determine if a graphic overlaps the display, returns error (DF = 1) if no overlap.</td></tr>
+<tr><td>gfx_adj_cursor</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks origin x,y values to validate a character can be drawn on the display. The x and y values may be adjusted so the cursor wraps to the next character position.</td></tr>
 </table>
-
 
 ## Private API List
 The methods write directly to the display buffer. They may not validate inputs or check boundaries.  They may consume registers and are meant to be called by one of the public API methods rather than called directly.
 
-* gfx_check_bounds  - validate that x,y co-ordinates are within the display height and width.
-* gfx_adj_bounds    - adjust the x,y co-ordinates to remain within the display height and width.
-* gfx_check_overlap - validate that x,y co-ordinates and height and width are within the display height and width.
 * gfx_write_pixel   - write data for a pixel at a particular x,y co-ordinates
 * gfx_write_line    - write data to form a line from x0,y0 to x1,y1
 * gfx_steep_flag    - set a flag if a line from x0,y0 to x1,y1 is steeply slanted.
@@ -104,14 +115,15 @@ The methods write directly to the display buffer. They may not validate inputs o
 * r9.1 = color
 * r9.0 = ASCII character or steep flag  
 
-## Notes: ##
-Public Gfx API call one or more private Gfx API which, in turn, call one or more of the Gfx Interface methods. The table below lists the Private API and the Gfx Interface methods they call.
+## GFX API That Call GFX Interface Methods ##
+Public GFX API may call private GFX API methods which, in turn, call one or more of the GFX Interface methods. The table below lists the GFX API methods and the GFX Interface methods they call.
 
 <table>
-<tr><th>Private API</th><th>Gfx Interface Methods Called</th></tr>
-<tr><td>gfx_check_bounds</td><td rowspan="3">gfx_disp_size</td></tr>
+<tr><th>GFX API</th><th>GFX Interface Methods Called</th></tr>
+<tr><td>gfx_check_bounds</td><td rowspan="4">gfx_disp_size</td></tr>
 <tr><td>gfx_adj_bounds</td></tr>
 <tr><td>gfx_check_overlap</td>
+<tr><td>gfx_adj_cursor</td></tr>
 <tr><td>gfx_write_pixel</td><td rowspan="4">gfx_disp_pixel</td></tr>
 <tr><td>gfx_write_bitmap</td></tr>
 <tr><td>gfx_write_char</td></tr>
@@ -121,8 +133,6 @@ Public Gfx API call one or more private Gfx API which, in turn, call one or more
 <tr><td>gfx_disp_v_line</td></tr>
 <tr><td rowspan="2">gfx_write_line</td><td>gfx_disp_h_line</td></tr>
 <tr><td>gfx_disp_v_line</td></tr>
-<tr><td>gfx_steep_flag</td><td rowspan="2">(None)</td></tr>
-<tr><td>gfx_ascii_font</td></tr>
 </table>
 
 Repository Contents

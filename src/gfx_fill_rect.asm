@@ -29,9 +29,9 @@
 ; Parameters: 
 ;   r9.1 - color
 ;   r7.1 - origin y 
+;   r7.0 - origin x
 ;   r8.1 - h 
 ;   r8.0 - w 
-;   r7.0 - origin x
 ; 
 ; Registers Used:
 ;   rb - origin
@@ -45,10 +45,11 @@
             proc    gfx_fill_rect
             call    gfx_check_bounds
             lbdf    fr_skip           ; if out bounds, don't draw
-            
+
             push    r9                ; save registers used
             push    r8
             push    r7
+            
             call    gfx_adj_bounds    ; adjust w and h, clip if needed
             lbdf    fr_exit           ; if error, exit immediately
             

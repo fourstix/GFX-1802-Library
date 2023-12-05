@@ -35,7 +35,7 @@
 ;   r8.1 - h bitmap height
 ;   r8.0 - w bitmap width
 ;   r9.1 - color
-;   rf   - pointer to 8x8 bitmap (eight data bytes)
+;   rf   - pointer to bitmap
 ;
 ; Note: Checks to see if any possible overlap with the
 ;   display before drawing bitmap.
@@ -50,12 +50,14 @@
             return                    ; and return
             
 dbmp_ok:    push    rf                ; save registers used
-            push    r9                
+            push    r9
+            push    r8                
             push    r7
-                       
+
             call    gfx_write_bitmap  ; draw new bitmap
 
 db_err:     pop     r7                ; restore registers        
+            pop     r8
             pop     r9
             pop     rf        
 

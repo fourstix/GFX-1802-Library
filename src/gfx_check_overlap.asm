@@ -44,6 +44,7 @@
 ;-------------------------------------------------------
             proc    gfx_check_overlap
             push    ra                ; save size register
+
             call    gfx_disp_size     ; ra.1 = height, ra.0 = width
             
             ; check left corners first

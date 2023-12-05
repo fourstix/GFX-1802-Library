@@ -54,28 +54,37 @@
 }
 .big
 {gfx_write_bitmap
-:0000 9b 73 8b 73 9a 73 8a 73 87 a9 98 aa 88 ab 4f bb
-/gfx_check_bounds 0017 00
-\gfx_check_bounds 0018
-/gfx_disp_pixel 001d 00
-\gfx_disp_pixel 001e
-:0010 9b fe bb cb 00 1f d4 00 00 c3 00 1f d4 00 00 2b
-:0020 87 fc 01 a7 8b ca 00 10 97 fc 01 b7 89 a7 2a 8a
-:0030 ca 00 0c 60 72 aa f0 ba 60 72 ab f0 bb d5
-+0014
-+001a
-+0026
-+0031
+:0000 9f 73 8f 73 9c 73 8c 73 9b 73 8b 73 9a 73 8a 73
+:0010 87 bc 97 aa 98 ab f8 00 ac ba 88 fc 07 f6 f6 f6
+:0020 bb 8c fa 07 c2 00 2d 9a fe ba c0 00 44 9f 73 8f
+:0030 73 8c f6 f6 f6 52 8f f4 af 9f 7c 00 bf 0f ba 60
+:0040 72 af f0 bf 9a fa 80 c2 00 63 98 73 88 73 8a b7
+/gfx_check_bounds 0056 00
+\gfx_check_bounds 0057
+/gfx_disp_pixel 005c 00
+\gfx_disp_pixel 005d
+:0050 9c 52 8c f4 a7 d4 00 00 c3 00 5e d4 00 00 60 72
+:0060 a8 f0 b8 1c 8c 52 88 f7 ca 00 21 1a 9b 52 8f f4
+:0070 af 9f 7c 00 bf f8 00 ac ba 2b 8b ca 00 21 60 72
+:0080 aa f0 ba 60 72 ab f0 bb 60 72 ac f0 bc 60 72 af
+:0090 f0 bf d5
++0025
++002b
++0048
++0059
++0069
++007c
 }
 .big
 {gfx_draw_bitmap
 /gfx_check_overlap 0001 00
 \gfx_check_overlap 0002
 :0000 d4 00 00 cb 00 09 fc 00 d5 9f 73 8f 73 99 73 89
-/gfx_write_bitmap 0016 00
-\gfx_write_bitmap 0017
-:0010 73 97 73 87 73 d4 00 00 60 72 a7 f0 b7 60 72 a9
-:0020 f0 b9 60 72 af f0 bf d5
+/gfx_write_bitmap 001a 00
+\gfx_write_bitmap 001b
+:0010 73 98 73 88 73 97 73 87 73 d4 00 00 60 72 a7 f0
+:0020 b7 60 72 a8 f0 b8 60 72 a9 f0 b9 60 72 af f0 bf
+:0030 d5
 +0004
 }
 .big
@@ -167,7 +176,7 @@
 }
 .big
 {gfx_write_block
-:0000 9a 73 8a 73 9c 73 8c 73 87 aa 97 ba f8 00 ac f8
+:0000 9c 73 8c 73 9a 73 8a 73 87 aa 97 ba f8 00 ac f8
 /gfx_disp_v_line 0018 00
 \gfx_disp_v_line 0019
 :0010 00 bc 88 ac 1c 98 a9 d4 00 00 c3 00 29 1a 2c 98
@@ -281,4 +290,14 @@
 :0030 f0 b8 60 72 a9 f0 b9 d5
 +0004
 +0017
+}
+.big
+{gfx_adj_cursor
+/gfx_disp_size 0005 00
+\gfx_disp_size 0006
+:0000 9a 73 8a 73 d4 00 00 8a ff 06 52 87 f5 c3 00 17
+:0010 f8 00 a7 97 fc 08 b7 9a ff 08 52 97 f5 c3 00 23
+:0020 f8 00 b7 60 72 aa f0 ba fc 00 d5
++000e
++001e
 }
