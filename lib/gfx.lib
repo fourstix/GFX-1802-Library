@@ -125,7 +125,7 @@
 \gfx_ascii_font 0009
 /gfx_ascii_font 000c 00
 :0000 9f 73 8f 73 9c 73 8c 73 f8 00 af f8 00 bf f8 00
-:0010 b8 89 fa 80 c2 00 1c f8 5f c0 00 24 89 ff 20 c3
+:0010 b8 88 fa 80 c2 00 1c f8 5f c0 00 24 88 ff 20 c3
 :0020 00 24 f8 00 a8 ac 88 fe a8 98 7e b8 88 fe a8 98
 :0030 7e b8 8c 52 88 f4 a8 98 7c 00 b8 88 52 8f f4 af
 :0040 98 52 9f 74 bf f8 05 ac 97 b8 8c c2 00 78 4f bc
@@ -157,31 +157,31 @@
 .big
 {gfx_write_rect
 :0000 9b 73 8b 73 9a 73 8a 73 87 aa 97 ba 88 ab 98 bb
-/gfx_disp_h_line 0013 00
-\gfx_disp_h_line 0014
-:0010 88 a9 d4 00 00 c3 00 4b 8a a7 9a b7 8b a8 9b b8
-/gfx_disp_v_line 0023 00
-\gfx_disp_v_line 0024
-:0020 98 a9 d4 00 00 c3 00 4b 8b a8 9b b8 8a a7 9a 52
-/gfx_disp_h_line 0036 00
-\gfx_disp_h_line 0037
-:0030 98 f4 b7 88 a9 d4 00 00 c3 00 4b 8b a8 9b b8 9a
-/gfx_disp_v_line 0049 00
-\gfx_disp_v_line 004a
-:0040 b7 8a 52 88 f4 a7 98 a9 d4 00 00 60 72 aa f0 ba
-:0050 60 72 ab f0 bb d5
-+0016
-+0026
-+0039
+/gfx_disp_h_line 0011 00
+\gfx_disp_h_line 0012
+:0010 d4 00 00 c3 00 47 8a a7 9a b7 8b a8 9b b8 98 a8
+/gfx_disp_v_line 0021 00
+\gfx_disp_v_line 0022
+:0020 d4 00 00 c3 00 47 8b a8 9b b8 8a a7 9a 52 98 f4
+/gfx_disp_h_line 0032 00
+\gfx_disp_h_line 0033
+:0030 b7 d4 00 00 c3 00 47 8b a8 9b b8 9a b7 8a 52 88
+/gfx_disp_v_line 0045 00
+\gfx_disp_v_line 0046
+:0040 f4 a7 98 a8 d4 00 00 60 72 aa f0 ba 60 72 ab f0
+:0050 bb d5
++0014
++0024
++0035
 }
 .big
 {gfx_write_block
-:0000 9c 73 8c 73 9a 73 8a 73 87 aa 97 ba f8 00 ac f8
+:0000 9b 73 8b 73 9a 73 8a 73 87 aa 97 ba f8 00 ab f8
 /gfx_disp_v_line 0018 00
 \gfx_disp_v_line 0019
-:0010 00 bc 88 ac 1c 98 a9 d4 00 00 c3 00 29 1a 2c 98
-:0020 a9 8a a7 9a b7 8c ca 00 17 60 72 aa f0 ba 60 72
-:0030 ac f0 bc d5
+:0010 00 bb 88 ab 1b 98 a8 d4 00 00 c3 00 29 1a 2b 98
+:0020 a8 8a a7 9a b7 8b ca 00 17 60 72 aa f0 ba 60 72
+:0030 ab f0 bb d5
 +001b
 +0027
 }
@@ -215,20 +215,20 @@
 }
 .big
 {gfx_write_s_line
-:0000 9a 73 8a 73 9b 73 8b 73 9c 73 8c 73 87 aa 97 ba
-:0010 8a 52 88 f7 ab 9a 52 98 f7 bb c3 00 27 9b fd 00
-:0020 bb f8 ff bc c0 00 2a f8 01 bc 8b f6 ac 88 52 8a
+:0000 9b 73 8b 73 9c 73 8c 73 9d 73 8d 73 87 ad 97 bd
+:0010 8d 52 88 f7 ab 9d 52 98 f7 bb c3 00 27 9b fd 00
+:0020 bb f8 ff bc c0 00 2a f8 01 bc 8b f6 ac 88 52 8d
 /gfx_disp_pixel 003d 00
 \gfx_disp_pixel 003e
-:0030 f7 c3 00 5f 89 ca 00 42 8a a7 9a b7 d4 00 00 c0
+:0030 f7 c3 00 5f 8a ca 00 42 8d a7 9d b7 d4 00 00 c0
 /gfx_disp_pixel 0047 00
 \gfx_disp_pixel 0048
-:0040 00 49 8a b7 9a a7 d4 00 00 9b 52 8c f7 ac c3 00
-:0050 5b 9c 52 9a f4 ba 8b 52 8c f4 ac 1a c0 00 2d 89
+:0040 00 49 8d b7 9d a7 d4 00 00 9b 52 8c f7 ac c3 00
+:0050 5b 9c 52 9d f4 bd 8b 52 8c f4 ac 1d c0 00 2d 8a
 /gfx_disp_pixel 006f 00
-:0060 ca 00 6a 8a a7 9a b7 c0 00 6e 88 b7 98 a7 d4 00
+:0060 ca 00 6a 8d a7 9d b7 c0 00 6e 88 b7 98 a7 d4 00
 \gfx_disp_pixel 0070
-:0070 00 60 72 aa f0 ba 60 72 ab f0 bb 60 72 ac f0 bc
+:0070 00 60 72 ab f0 bb 60 72 ac f0 bc 60 72 ad f0 bd
 :0080 d5
 +001b
 +0025
@@ -242,36 +242,37 @@
 }
 .big
 {gfx_write_line
-:0000 97 52 98 f5 ca 00 25 87 52 88 f7 a9 c3 00 1f 89
-:0010 fd 00 a9 87 52 88 a7 f0 a8 97 52 98 b7 f0 b8 d4
-/gfx_disp_h_line 0020 00
-\gfx_disp_h_line 0021
-:0020 00 00 c0 00 73 87 52 88 f7 ca 00 4a 97 52 98 f7
-:0030 a9 c3 00 44 89 fd 00 a9 87 52 88 a7 f0 a8 97 52
-/gfx_disp_v_line 0045 00
-\gfx_disp_v_line 0046
-/gfx_steep_flag 004b 00
-\gfx_steep_flag 004c
-:0040 98 b7 f0 b8 d4 00 00 c0 00 73 d4 00 00 89 c2 00
-:0050 5d 87 52 97 a7 f0 b7 88 52 98 a8 f0 b8 87 52 88
-:0060 f7 c3 00 70 87 52 88 a7 f0 a8 97 52 98 b7 f0 b8
-/gfx_write_s_line 0071 00
-\gfx_write_s_line 0072
-:0070 d4 00 00 fc 00 d5
-+0005
-+000d
-+0023
-+002a
-+0032
-+0048
-+004f
-+0062
+:0000 9a 73 8a 73 97 52 98 f5 ca 00 2b 87 52 88 f7 aa
+:0010 c3 00 23 8a fd 00 aa 87 52 88 a7 f0 a8 97 52 98
+/gfx_disp_h_line 0026 00
+\gfx_disp_h_line 0027
+:0020 b7 f0 b8 8a a8 d4 00 00 c0 00 7b 87 52 88 f7 ca
+:0030 00 52 97 52 98 f7 aa c3 00 4a 8a fd 00 aa 87 52
+/gfx_disp_v_line 004d 00
+\gfx_disp_v_line 004e
+:0040 88 a7 f0 a8 97 52 98 b7 f0 b8 8a a8 d4 00 00 c0
+/gfx_steep_flag 0053 00
+\gfx_steep_flag 0054
+:0050 00 7b d4 00 00 8a c2 00 65 87 52 97 a7 f0 b7 88
+:0060 52 98 a8 f0 b8 87 52 88 f7 c3 00 78 87 52 88 a7
+/gfx_write_s_line 0079 00
+\gfx_write_s_line 007a
+:0070 f0 a8 97 52 98 b7 f0 b8 d4 00 00 60 72 aa f0 ba
+:0080 fc 00 d5
++0009
++0011
++0029
++0030
++0038
++0050
++0057
++006a
 }
 .big
 {gfx_steep_flag
-:0000 9a 73 8a 73 87 52 88 f7 aa c3 00 0f fd 00 aa 97
-:0010 52 98 f7 ba c3 00 1a fd 00 ba 8a 52 9a f7 c3 00
-:0020 24 f8 00 c8 f8 01 a9 60 72 aa f0 ba d5
+:0000 9b 73 8b 73 87 52 88 f7 ab c3 00 0f fd 00 ab 97
+:0010 52 98 f7 bb c3 00 1a fd 00 bb 8b 52 9b f7 c3 00
+:0020 24 f8 00 c8 f8 01 aa 60 72 ab f0 bb d5
 +000a
 +0015
 +001f

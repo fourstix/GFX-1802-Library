@@ -30,18 +30,19 @@ The following methods need to be implemented in a device library that is linked 
 * ra.1 = display height 
 * ra.0 = display width
 * r9.1 = color
-* r9.0 = line length  
+* r9.0 = rotation  
+* r8.0 = line length  
 * r7.1 = origin y (row value, 0 to display height-1)
 * r7.0 = origin x (column value, 0 to display width-1)
 
 <table>
-<tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R9.1</th><th>R9.0</th><th>Returns</th></tr>
-<tr><td rowspan="2">gfx_disp_size</th><td rowspan="2" colspan="4">(No Inputs)</td><td>RA.1 = device height</td></tr>
+<tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R8.0</th><th>R9.1</th><th>R9.0</th><th>Returns</th></tr>
+<tr><td rowspan="2">gfx_disp_size</th><td rowspan="2" colspan="5">(No Inputs)</td><td>RA.1 = device height</td></tr>
 <tr><td>RA.0 = display width</td></tr>
-<tr><td>gfx_disp_clear</th><td colspan="4">(No Inputs)</td><td>DF = 1, if error</td></tr>
-<tr><td>gfx_disp_pixel</td><td>y</td><td>x</td><td>color</td><td> - </td><td>DF = 1, if error</td></tr>
-<tr><td>gfx_disp_h_line</td><td>origin y</td><td>origin x</td><td>color</td><td>length</td><td>DF = 1, if error</td></tr>
-<tr><td>gfx_disp_v_line</td><td>origin y</td><td>origin x</td><td>color</td><td>length</td><td>DF = 1, if error</td></tr>
+<tr><td>gfx_disp_clear</th><td colspan="5">(No Inputs)</td><td>DF = 1, if error</td></tr>
+<tr><td>gfx_disp_pixel</td><td>y</td><td>x</td><td> - </td><td>color</td><td> - </td><td>DF = 1, if error</td></tr>
+<tr><td>gfx_disp_h_line</td><td>origin y</td><td>origin x</td><td>length</td><td>color</td><td> - </td><td>DF = 1, if error</td></tr>
+<tr><td>gfx_disp_v_line</td><td>origin y</td><td>origin x</td><td>length</td><td>color</td><td> - </td><td>DF = 1, if error</td></tr>
 </table>
 
 Graphics Library API
@@ -65,32 +66,32 @@ The methods validate inputs and check boundaries before updating the display buf
 * r7.1 = origin y (row value, 0 to device height-1)
 * r7.0 = origin x (column value, 0 to device width-1)
 * r8.1 = endpoint y, or height
-* r8.0 = endpoint x, or width
+* r8.0 = endpoint x, width or ASCII character
 * r9.1 = color
-* r9.0 = ASCII character  
+* r9.0 = rotation  
 
 <table>
 <tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R8.1</th><th>R8.0</th><th>R9.1</th><th>R9.0</th></tr>
 <tr><th colspan="7">Notes</th></tr>
-<tr><td>gfx_draw_pixel</td><td>y</td><td>x</td><td> - </td><td> - </td><td>color</td><td> - </td></tr>
+<tr><td>gfx_draw_pixel</td><td>y</td><td>x</td><td> - </td><td> - </td><td>color</td><td>rotation</td></tr>
 <tr><td colspan="7">Checks x,y values, returns error (DF = 1) if </td></tr>
-<tr><td>gfx_draw_line</td><td>origin y</td><td> origin x</td><td>endpoint y</td><td>endpoint x</td><td>color</td><td> - </td></tr>
+<tr><td>gfx_draw_line</td><td>origin y</td><td> origin x</td><td>endpoint y</td><td>endpoint x</td><td>color</td><td>rotation</td></tr>
 <tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
-<tr><td>gfx_draw_rect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td> - </td></tr>
+<tr><td>gfx_draw_rect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td>rotation</td></tr>
 <tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
-<tr><td>gfx_fill_rect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td> - </td></tr>
+<tr><td>gfx_fill_rect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td>rotation</td></tr>
 <tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
-<tr><td>gfx_draw_bitmap</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td> - </td></tr>
+<tr><td>gfx_draw_bitmap</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td>rotation</td></tr>
 <tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
-<tr><td>gfx_draw_char</td><td>origin y</td><td>origin x</td><td> - </td><td> - </td><td>color</td><td>character</td></tr>
+<tr><td>gfx_draw_char</td><td>origin y</td><td>origin x</td><td> - </td><td>character</td><td>color</td><td>rotation</td></tr>
 <tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. Checks ASCII character value, draws DEL (127) if non-printable.<br> Returns: r7 points to next character position.</td></tr>
-<tr><td>gfx_check_bounds</td><td>origin y</td><td> origin x</td><td> - </td><td> - </td><td> - </td><td> - </td></tr>
+<tr><td>gfx_check_bounds</td><td>origin y</td><td> origin x</td><td> - </td><td> - </td><td> - </td><td>rotation</td></tr>
 <tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
-<tr><td>gfx_adj_bounds</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
+<tr><td>gfx_adj_bounds</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td>rotation</td></tr>
 <tr><td colspan="7">Checks origin x, y, width and height values. The values may be clipped to the edges of display. Returns error (DF = 1) if clipping fails.</td></tr>
-<tr><td>gfx_check_overlap</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td> - </td></tr>
+<tr><td>gfx_check_overlap</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td>rotation</td></tr>
 <tr><td colspan="7">Checks origin x,y values, height and width to determine if a graphic overlaps the display, returns error (DF = 1) if no overlap.</td></tr>
-<tr><td>gfx_adj_cursor</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
+<tr><td>gfx_adj_cursor</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td>rotation</td></tr>
 <tr><td colspan="7">Checks origin x,y values to validate a character can be drawn on the display. The x and y values may be adjusted so the cursor wraps to the next character position.</td></tr>
 </table>
 
@@ -111,9 +112,10 @@ The methods write directly to the display buffer. They may not validate inputs o
 * r7.1 = origin y (row value, 0 to device height-1)
 * r7.0 = origin x (column value, 0 to device width-1)
 * r8.1 = endpoint y, or height
-* r8.0 = endpoint x, or width
+* r8.0 = endpoint x, width or ASCII character 
 * r9.1 = color
-* r9.0 = ASCII character or steep flag  
+* r9.0 = rotation
+* ra.0 = steep flag  
 
 ## GFX API That Call GFX Interface Methods ##
 Public GFX API may call private GFX API methods which, in turn, call one or more of the GFX Interface methods. The table below lists the GFX API methods and the GFX Interface methods they call.

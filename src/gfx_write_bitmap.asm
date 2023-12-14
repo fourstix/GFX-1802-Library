@@ -49,7 +49,7 @@
             ;     r8.1  -   h (height of bitmap)
             ;     r8.0  -   w (width of bitmap)
             ;     r9.1  -   color
-            ;     r9.0  -   scratch register for (j * byte width)
+            ;     r9.0  -   
             ;     ra.1  -   bitmap byte (b value for shifting)
             ;     ra.0  -   y value 
             ;     rc.0  -   inner iterator for x (i value)

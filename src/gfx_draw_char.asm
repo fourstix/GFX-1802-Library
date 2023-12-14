@@ -28,7 +28,8 @@
 ;   r7.1 - origin y 
 ;   r7.0 - origin x 
 ;   r9.1 - color
-;   r9.0 - ASCII character to draw 
+;   r9.0 - rotation 
+;   r8.0 - ASCII character to draw 
 ;
 ; Registers Used:
 ;   r8   - scratch register
@@ -40,7 +41,8 @@
 ;         R7 = next character location
 ;-------------------------------------------------------
             proc    gfx_draw_char
-                                          
+
+                                            
             push    r9                ; save registers used           
             push    r8
             

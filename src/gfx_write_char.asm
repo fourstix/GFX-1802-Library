@@ -30,7 +30,8 @@
 ;   r7.1 - origin y  (signed byte)
 ;   r7.0 - origin x  (signed byte)
 ;   r9.1 - color
-;   r9.0 - character to write
+;   r9.0 - rotation
+;   r8.0 - character to write
 ;
 ; Registers Used:
 ;   rf   - pointer to char bitmap (five data bytes)
@@ -53,15 +54,15 @@
             ldi      0          ; clear high byte of index
             phi     r8        
                 
-            ;---- set up offset 
-            glo     r9          ; get character
+            ;---- convert character to offset 
+            glo     r8          ; get character
             ani     $80         ; check for non-ascii
             lbz     char_ok
 
             ldi     C_ERROR     ; show DEL for all non-ascii chars
             lbr     set_offset  ; set offset to DEL value
             
-char_ok:    glo     r9          
+char_ok:    glo     r8          
             smi     C_OFFSET    ; convert to offset value
             lbdf    set_offset  ; printable character 
             
