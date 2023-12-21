@@ -46,9 +46,13 @@
             push    ra                ; save size register
 
             call    gfx_disp_size     ; ra.1 = height, ra.0 = width
-            
+            glo     r9                ; check rotation
+            shr                       ; lsb indicates upright or sideways
+            lbnf    upright           ; r=0 or r=2 is upright
+            swap    ra                ; DF=1 => r=1 or r=3 (sideways) so swap w,h
+              
             ; check left corners first
-            glo     r7                ; check x value
+upright:    glo     r7                ; check x value
             str     r2                ; save in M(X)
             glo     ra                ; get device width
             sd                        ; M(X) - D => x0 - width

@@ -27,14 +27,15 @@
 ;
 ; Parameters: 
 ;   r9.1 - color
+;   r9.0 - rotation
 ;   r8.1 - h 
 ;   r8.0 - w 
 ;   r7.1 - origin y 
 ;   r7.0 - origin x 
 ;
 ; Registers Used:
-;   rb - origin
 ;   ra - dimensions
+;   rb - origin
 ;
 ; Return:
 ;   DF = 1 if error, 0 if no error (r7 & r9 consumed)
@@ -47,18 +48,16 @@
             copy    r7, ra    ; save origin 
             copy    r8, rb    ; save dimensions
             
-            glo     r8        ; get w for length
-            plo     r9        ; set up length of horizontal line
-
-            call    gfx_disp_h_line  ; draw top line 
+            ; w for length is already in r8.0
+            call    gfx_write_h_line  ; draw top line 
             lbdf    wr_done          ; if error, exit immediately
 
             copy    ra, r7    ; restore origin
             copy    rb, r8    ; restore w and h values
             ghi     r8        ; get h for length
-            plo     r9        ; set up length of vertical line
+            plo     r8        ; set up length of vertical line
 
-            call    gfx_disp_v_line ; draw left line
+            call    gfx_write_v_line ; draw left line
             lbdf    wr_done         ; if error, exit immediately
             
             copy    rb, r8    ; restore h and w values
@@ -69,10 +68,9 @@
             ghi     r8        ; get h
             add               ; D = y0 + h
             phi     r7        ; set new origin at lower left corner
-            glo     r8        ; get w for length
-            plo     r9        ; set length for horizontal line
-
-            call    gfx_disp_h_line ; draw bottom line
+            
+            ; w for length is already in r8.0
+            call    gfx_write_h_line ; draw bottom line
             lbdf    wr_done         ; if error, exit immediately
             
             copy    rb, r8    ; restore w and h values
@@ -84,9 +82,9 @@
             add               ; D = x0 + w
             plo     r7        ; set origin to upper right corner
             ghi     r8        ; get h for length
-            plo     r9        ; set length for vertical line
+            plo     r8        ; set length for vertical line
 
-            call    gfx_disp_v_line   ; draw right line
+            call    gfx_write_v_line   ; draw right line
             
 wr_done:    pop     ra         ; restore registers
             pop     rb

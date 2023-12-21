@@ -33,42 +33,42 @@
 ;   r9.1 - color
 ;
 ; Registers Used:
-;   ra   - difference register
+;   rb   - difference register
 ;
 ; Note: A steep line is a line with a larger change in y
 ; than the change in x.
 ;                  
-; Return: r9.0 - steep flag 
+; Return: ra.0 - steep flag 
 ;   steep flag = 1 (true) if steep line
 ;   steep flag = 0 (false) if not
 ;-------------------------------------------------------
             proc   gfx_steep_flag
-            push   ra       ; save difference register
+            push   rb       ; save difference register
 
             glo    r7       ; get origin x value
             str    r2       ; store origin x in M(X)
             glo    r8       ; get endpoint x
             sm              ; subtract origin x in M(X) from endpoint x in D
-            plo    ra       ; save x difference in ra.0            
+            plo    rb       ; save x difference in rb.0            
             lbdf   diff_y   ; if positive, calculate y difference
 
             sdi    0        ; if negative, negate it
-            plo    ra       ; put absolute x difference in ra.0
+            plo    rb       ; put absolute x difference in rb.0
 
 diff_y:     ghi    r7       ; get origin y value
             str    r2       ; store origin y in M(X)
             ghi    r8       ; get endpoint y
-            sm              ; subtract origin y in M(X) from endpoint y in D
+            sm              ; subtrbct origin y in M(X) from endpoint y in D
 
-            phi    ra       ; save y difference in ra.1
+            phi    rb       ; save y difference in rb.1
             lbdf   st_calc  ; if positive, we can check for steepness
 
             sdi    0        ; if negative, negate it
-            phi    ra       ; put absolute y difference in ra.1
+            phi    rb       ; put absolute y difference in rb.1
 
-st_calc:    glo    ra       ; get xdiff
+st_calc:    glo    rb       ; get xdiff
             str    r2       ; store in M(X)
-            ghi    ra       ; get ydiff
+            ghi    rb       ; get ydiff
             sm              ; ydiff in D - xdiff in M(X)
             lbdf   is_steep ; if ydiff > xdiff, steep line
             
@@ -76,9 +76,9 @@ st_calc:    glo    ra       ; get xdiff
             lskp            ; skip over two bytes that set flag true
             
 is_steep:   ldi    $01      ; steep line flag in D
-            plo    r9       ; set steep flag in r9.0 for slanted line drawing                                    
+            plo    ra       ; set steep flag in ra.0 for slanted line drawing                                    
 
-            pop    ra       ; retore ra
+            pop    rb       ; retore rb
             return
             
             endp

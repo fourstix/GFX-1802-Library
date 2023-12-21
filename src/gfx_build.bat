@@ -16,6 +16,8 @@
 [Your_Path]\Asm02\asm02 -L -D1802MINIPLUS gfx_steep_flag.asm
 [Your_Path]\Asm02\asm02 -L -D1802MINIPLUS gfx_draw_line.asm
 [Your_Path]\Asm02\asm02 -L -D1802MINIPLUS gfx_adj_cursor.asm
+[Your_Path]\Asm02\asm02 -L -D1802MINIPLUS gfx_dimensions.asm
+
 
 
 
@@ -25,5 +27,6 @@ type gfx_ascii_font.prg gfx_write_char.prg gfx_draw_char.prg >> gfx.lib
 type gfx_write_rect.prg gfx_write_block.prg gfx_draw_rect.prg >> gfx.lib
 type gfx_fill_rect.prg gfx_write_s_line.prg gfx_write_line.prg >> gfx.lib
 type gfx_steep_flag.prg gfx_draw_line.prg gfx_adj_cursor.prg >> gfx.lib
+type gfx_dimensions.prg >> gfx.lib
 
 copy gfx.lib ..\lib\gfx.lib

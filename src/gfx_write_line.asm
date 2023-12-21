@@ -30,11 +30,15 @@
 ;             r8.1 - endpoint y 
 ;             r8.0 - endpoint x 
 ;             r9.1 - color
-;             r9.0 - length
+;             r9.0 - rotation
+; Registers Used:
+;             ra.0 - temp value, steep flag
 ;                  
 ; Return: r7, r8, r9 - consumed
 ;-------------------------------------------------------
             proc    gfx_write_line
+            push    ra                ; save temp register
+            
             ghi     r7                ; get origin y
             str     r2                ; save at M(X)
             ghi     r8                ; get endpoint y
@@ -45,15 +49,17 @@
             str     r2                ; save at M(X)
             glo     r8                ; get endpoint x
             sm                        ; length = Endpoint - Origin
-            plo     r9                ; put in temp register
+            plo     ra                ; put in temp register
             lbdf    wl_horz           ; if positive, we're good to go
 
-            glo     r9                ; get negative length 
+            glo     ra                ; get negative length 
             sdi     0                 ; negate it (-D = 0 - D)
-            plo     r9                ; put length in temp register
+            plo     ra                ; put length in temp register
             xchg    r7,r8             ; exchange values so origin is left of endpoint
 
-wl_horz:    call    gfx_disp_h_line
+wl_horz:    glo     ra                ; get length from temp register
+            plo     r8                ; set line length
+            call    gfx_write_h_line
             lbr     wl_done
 
 wl_vchk:    glo     r7                ; get origin x
@@ -66,21 +72,23 @@ wl_vchk:    glo     r7                ; get origin x
             str     r2                ; save at M(X)
             ghi     r8                ; get endpoint y
             sm                        ; length = endpoint - origin
-            plo     r9                ; put in temp register
+            plo     ra                ; put in temp register
             lbdf    wl_vert           ; if positive, we're good 
 
-            glo     r9                ; get negative length
+            glo     ra                ; get negative length
             sdi     0                 ; negate length 
-            plo     r9                ; put length in temp register
+            plo     ra                ; put length in temp register
             xchg    r7,r8             ; make sure origin is above endpoint
             
-wl_vert:    call    gfx_disp_v_line
+wl_vert:    glo     ra                ; get length from temp register
+            plo     r8                ; set line length
+            call    gfx_write_v_line
             lbr     wl_done
             
-            ; r9.0 is used as steep flag for drawing a sloping line             
+            ; ra.0 is used as steep flag for drawing a sloping line             
 wl_slant:   call    gfx_steep_flag          
 
-            glo     r9                ; check steep flag
+            glo     ra                ; check steep flag
             lbz     wl_schk           ; if not steep, jump to check for exchange
             
             ; for steep line, swap x,y bytes for origin and endpoint values
@@ -97,7 +105,8 @@ wl_schk:    glo     r7                ; make sure origin x is left of endpoint x
    
 wl_slope:   call    gfx_write_s_line  ; draw a sloping line   
 
-wl_done:    clc                       ; make sure DF = 0
+wl_done:    pop     ra                ; restore temp register
+            clc                       ; make sure DF = 0
             return
             
             endp

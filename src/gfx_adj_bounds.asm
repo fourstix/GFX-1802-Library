@@ -24,6 +24,7 @@
 ;   r7.0 - x0 signed byte
 ;   r8.1 - h  
 ;   r8.0 - w
+;   r9.0 - rotation
 ;
 ; Registers Used:
 ;   ra.1 - device height
@@ -41,9 +42,16 @@
 ;-------------------------------------------------------
             proc    gfx_adj_bounds
             push    ra                ; save size register
+            push    r7
             call    gfx_disp_size     ; ra.1 = device height, ra.0 = device width
             
-            ghi     r8                ; check h first
+            glo     r9                ; get rotation value (r)
+            ani    $03                ; rotation has values 0 to 3
+            shr                       ; check lsb for sideways (r=1 or r=3)
+            lbnf    adj_wh            ; DF = 0, means upright (r=0 or r=2)
+            swap    ra                ; if sideways, swap width and height
+            
+adj_wh:     ghi     r8                ; check h first
             lbz     bad_clip          ; height should not be 0
             str     r2                ; save h in M(X)
             ghi     ra                ; get device height
@@ -97,6 +105,7 @@ bad_clip:   stc                       ; otherwise, exit with error
             lbr     clip_exit
 
 clip_done:  clc                       ; clear df (no error)
-clip_exit:  pop     ra                ; restore size register
+clip_exit:  pop     r7                ; restore origin
+            pop     ra                ; restore size register
             return
             endp
