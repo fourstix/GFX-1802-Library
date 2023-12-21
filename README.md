@@ -61,6 +61,7 @@ The methods validate inputs and check boundaries before updating the display buf
 * gfx_adj_bounds    - adjust the x,y co-ordinates to remain within the display height and width.
 * gfx_check_overlap - validate that x,y co-ordinates and height and width are within the display height and width.
 * gfx_adj_cursor    - adjust the x,y co-ordinates, if needed, so the next character is drawn entirely within the display height and width.
+* gfx_dimensions    - get the maximum x,y values for the rotated display
 
 ## API Registers:
 * r7.1 = origin y (row value, 0 to device height-1)
@@ -74,7 +75,7 @@ The methods validate inputs and check boundaries before updating the display buf
 <tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R8.1</th><th>R8.0</th><th>R9.1</th><th>R9.0</th></tr>
 <tr><th colspan="7">Notes</th></tr>
 <tr><td>gfx_draw_pixel</td><td>y</td><td>x</td><td> - </td><td> - </td><td>color</td><td>rotation</td></tr>
-<tr><td colspan="7">Checks x,y values, returns error (DF = 1) if </td></tr>
+<tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
 <tr><td>gfx_draw_line</td><td>origin y</td><td> origin x</td><td>endpoint y</td><td>endpoint x</td><td>color</td><td>rotation</td></tr>
 <tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
 <tr><td>gfx_draw_rect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td>rotation</td></tr>
@@ -93,6 +94,8 @@ The methods validate inputs and check boundaries before updating the display buf
 <tr><td colspan="7">Checks origin x,y values, height and width to determine if a graphic overlaps the display, returns error (DF = 1) if no overlap.</td></tr>
 <tr><td>gfx_adj_cursor</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td>rotation</td></tr>
 <tr><td colspan="7">Checks origin x,y values to validate a character can be drawn on the display. The x and y values may be adjusted so the cursor wraps to the next character position.</td></tr>
+<tr><td>gfx_dimensions</td><td> - </td><td> - </td><td> - </td><td> - </td><td> - </td><td>rotation</td></tr>
+<tr><td colspan="7">Returns maximum  x,y values for the rotated dislay, returns RA.1 = Maximum Y (h - 1) and RA.0 = Maximum X (w - 1)</td></tr>
 </table>
 
 ## Private API List
@@ -101,6 +104,8 @@ The methods write directly to the display buffer. They may not validate inputs o
 * gfx_write_pixel   - write data for a pixel at a particular x,y co-ordinates
 * gfx_write_line    - write data to form a line from x0,y0 to x1,y1
 * gfx_steep_flag    - set a flag if a line from x0,y0 to x1,y1 is steeply slanted.
+* gfx_write_h_line  - write data to form a horizontal line from x0,y0 to x1,y0
+* gfx_write_v_line  - write data to form a vertical line from x0,y0 to x0,y1
 * gfx_write_s_line  - write data to form a slanted line from x0,y0 to x1,y1
 * gfx_write_rect    - write data to form a rectangle with its upper left corner at x0,y0 with width w and height h.
 * gfx_write_block   - write data to form a filled rectangle with its upper left corner at x0,y0 with width w and height h.
@@ -122,10 +127,11 @@ Public GFX API may call private GFX API methods which, in turn, call one or more
 
 <table>
 <tr><th>GFX API</th><th>GFX Interface Methods Called</th></tr>
-<tr><td>gfx_check_bounds</td><td rowspan="4">gfx_disp_size</td></tr>
+<tr><td>gfx_check_bounds</td><td rowspan="5">gfx_disp_size</td></tr>
 <tr><td>gfx_adj_bounds</td></tr>
 <tr><td>gfx_check_overlap</td>
 <tr><td>gfx_adj_cursor</td></tr>
+<tr><td>gfx_dimensions</td></tr>
 <tr><td>gfx_write_pixel</td><td rowspan="4">gfx_disp_pixel</td></tr>
 <tr><td>gfx_write_bitmap</td></tr>
 <tr><td>gfx_write_char</td></tr>
@@ -134,6 +140,10 @@ Public GFX API may call private GFX API methods which, in turn, call one or more
 <tr><td rowspan="2">gfx_write_rect</td><td>gfx_disp_h_line</td></tr>
 <tr><td>gfx_disp_v_line</td></tr>
 <tr><td rowspan="2">gfx_write_line</td><td>gfx_disp_h_line</td></tr>
+<tr><td>gfx_disp_v_line</td></tr>
+<tr><td rowspan="2">gfx_write_h_line</td><td>gfx_disp_h_line</td></tr>
+<tr><td>gfx_disp_v_line</td></tr>
+<tr><td rowspan="2">gfx_write_v_line</td><td>gfx_disp_h_line</td></tr>
 <tr><td>gfx_disp_v_line</td></tr>
 </table>
 

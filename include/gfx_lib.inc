@@ -9,6 +9,16 @@
 #define C_HEIGHT      8
 
 ;-------------------------------------------------------------------------------
+; Rotation constants
+;-------------------------------------------------------------------------------
+#define ROTATE_0      0
+#define ROTATE_90     1
+#define ROTATE_180    2
+#define ROTATE_270    3
+#define ROTATE_360    0
+#define ROTATE_NONE   0
+
+;-------------------------------------------------------------------------------
 ; Public GFX Library Routines
 ;-------------------------------------------------------------------------------
 
@@ -21,4 +31,5 @@
             extrn   gfx_check_bounds
             extrn   gfx_adj_bounds
             extrn   gfx_adj_cursor
+            extrn   gfx_dimensions
             
