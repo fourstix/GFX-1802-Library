@@ -135,15 +135,11 @@ Public GFX API may call private GFX API methods which, in turn, call one or more
 <tr><td>gfx_write_bitmap</td></tr>
 <tr><td>gfx_write_char</td></tr>
 <tr><td>gfx_write_s_line</td></tr>
-<tr><td>gfx_write_block</td><td>gfx_disp_v_line</td></tr>
-<tr><td rowspan="2">gfx_write_rect</td><td>gfx_disp_h_line</td></tr>
-<tr><td>gfx_disp_v_line</td></tr>
-<tr><td rowspan="2">gfx_write_line</td><td>gfx_disp_h_line</td></tr>
-<tr><td>gfx_disp_v_line</td></tr>
-<tr><td rowspan="2">gfx_write_h_line</td><td>gfx_disp_h_line</td></tr>
-<tr><td>gfx_disp_v_line</td></tr>
-<tr><td rowspan="2">gfx_write_v_line</td><td>gfx_disp_h_line</td></tr>
-<tr><td>gfx_disp_v_line</td></tr>
+<tr><td>gfx_write_block</td><td rowspan="5">gfx_disp_h_line, gfx_disp_v_line</td></tr>
+<tr><td>gfx_write_rect</td></tr>
+<tr><td>gfx_write_line</td></tr>
+<tr><td>gfx_write_h_line</td></tr>
+<tr><td>gfx_write_v_line</td></tr>
 </table>
 
 Repository Contents
