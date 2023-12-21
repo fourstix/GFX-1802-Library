@@ -103,8 +103,8 @@ The methods write directly to the display buffer. They may not validate inputs o
 * gfx_write_pixel   - write data for a pixel at a particular x,y co-ordinates
 * gfx_write_line    - write data to form a line from x0,y0 to x1,y1
 * gfx_steep_flag    - set a flag if a line from x0,y0 to x1,y1 is steeply slanted.
-* gfx_write_h_line  - write data to form a horizontal line from x0,y0 to x1,y0
-* gfx_write_v_line  - write data to form a vertical line from x0,y0 to x0,y1
+* gfx_write_h_line  - write data to form a horizontal line at y0 from x0 to x1
+* gfx_write_v_line  - write data to form a vertical line at x0 from y0 to y1
 * gfx_write_s_line  - write data to form a slanted line from x0,y0 to x1,y1
 * gfx_write_rect    - write data to form a rectangle with its upper left corner at x0,y0 with width w and height h.
 * gfx_write_block   - write data to form a filled rectangle with its upper left corner at x0,y0 with width w and height h.
