@@ -34,8 +34,14 @@
             proc    gfx_adj_cursor
             push    ra
             call    gfx_disp_size
+
+            glo     r9          ; get rotation value (r)
+            ani    $03          ; rotation has values 0 to 3
+            shr                 ; check lsb for sideways (r=1 or r=3)
+            lbnf    upright     ; DF = 0, means upright (r=0 or r=2)
+            swap    ra          ; if sideways, swap width and height
               
-            glo     ra          ; get display width
+upright:    glo     ra          ; get display width
             smi     C_WIDTH     ; Cursor X = WIDTH - C_WIDTH
             str     r2          ; save Cursor X in M(X)
 

@@ -122,7 +122,7 @@ shft_bits:  glo     r8          ; check shift value count
             lbdf    no_draw     ; if out of bounds, don't draw it
   
             ;---- bytes represent font columns (vertical font data)
-            call    gfx_disp_pixel
+            call    gfx_write_pixel
               
 no_draw:    dec     r8          ; count down
             ghi     r7          ; increment y value for next bit

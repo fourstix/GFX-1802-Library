@@ -54,7 +54,7 @@
             plo     r8        ; set up length of vertical line
             
             ; draw vertical line at x
-wb_loop:    call    gfx_disp_v_line   
+wb_loop:    call    gfx_write_v_line   
             lbdf    wb_exit   ; if error, exit immediately
             
             inc     ra        ; increment x for next column

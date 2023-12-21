@@ -49,7 +49,7 @@
             ;     r8.1  -   h (height of bitmap)
             ;     r8.0  -   w (width of bitmap)
             ;     r9.1  -   color
-            ;     r9.0  -   
+            ;     r9.0  -   rotation
             ;     ra.1  -   bitmap byte (b value for shifting)
             ;     ra.0  -   y value 
             ;     rc.0  -   inner iterator for x (i value)
@@ -142,7 +142,7 @@ wbmp_chkb:  ghi     ra          ; get bitmap byte
             call    gfx_check_bounds
             lbdf    wbmp_skp    ; don't draw pixel if off canvas
 
-            call    gfx_disp_pixel
+            call    gfx_write_pixel
 wbmp_skp:   pop     r8          ; restore h,w
             
             ;----- end of inner loop

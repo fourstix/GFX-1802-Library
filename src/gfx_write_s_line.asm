@@ -109,7 +109,7 @@ sl_loop:    glo    r8         ; for x <= x1; x++
             lbnz   sl_steep1  ; if steep, transpose x,y and draw
             copy   rd, r7     ; copy current x,y to pixel x,y
 
-            call   gfx_disp_pixel
+            call   gfx_write_pixel
             lbr    sl_cont    ; continue    
 
 sl_steep1:  glo    rd         ; transpose x and y for pixel
@@ -117,7 +117,7 @@ sl_steep1:  glo    rd         ; transpose x and y for pixel
             ghi    rd         ; put y in pixel x
             plo    r7         ; draw transposed pixel
 
-            call   gfx_disp_pixel 
+            call   gfx_write_pixel 
             
 sl_cont:    ghi    rb         ; get dy
             str    r2         ; save in M(X)
@@ -155,7 +155,7 @@ sl_steep2:  glo    r8         ; transpose x and y for pixel
             ghi    r8         ; put y in pixel x
             plo    r7         ; draw transposed pixel 
                                  
-sl_end:     call   gfx_disp_pixel 
+sl_end:     call   gfx_write_pixel 
 
             pop    rb
             pop    rc

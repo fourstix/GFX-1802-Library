@@ -49,7 +49,7 @@
             copy    r8, rb    ; save dimensions
             
             ; w for length is already in r8.0
-            call    gfx_disp_h_line  ; draw top line 
+            call    gfx_write_h_line  ; draw top line 
             lbdf    wr_done          ; if error, exit immediately
 
             copy    ra, r7    ; restore origin
@@ -57,7 +57,7 @@
             ghi     r8        ; get h for length
             plo     r8        ; set up length of vertical line
 
-            call    gfx_disp_v_line ; draw left line
+            call    gfx_write_v_line ; draw left line
             lbdf    wr_done         ; if error, exit immediately
             
             copy    rb, r8    ; restore h and w values
@@ -70,7 +70,7 @@
             phi     r7        ; set new origin at lower left corner
             
             ; w for length is already in r8.0
-            call    gfx_disp_h_line ; draw bottom line
+            call    gfx_write_h_line ; draw bottom line
             lbdf    wr_done         ; if error, exit immediately
             
             copy    rb, r8    ; restore w and h values
@@ -84,7 +84,7 @@
             ghi     r8        ; get h for length
             plo     r8        ; set length for vertical line
 
-            call    gfx_disp_v_line   ; draw right line
+            call    gfx_write_v_line   ; draw right line
             
 wr_done:    pop     ra         ; restore registers
             pop     rb

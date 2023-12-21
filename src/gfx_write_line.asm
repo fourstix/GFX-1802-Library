@@ -59,7 +59,7 @@
 
 wl_horz:    glo     ra                ; get length from temp register
             plo     r8                ; set line length
-            call    gfx_disp_h_line
+            call    gfx_write_h_line
             lbr     wl_done
 
 wl_vchk:    glo     r7                ; get origin x
@@ -82,7 +82,7 @@ wl_vchk:    glo     r7                ; get origin x
             
 wl_vert:    glo     ra                ; get length from temp register
             plo     r8                ; set line length
-            call    gfx_disp_v_line
+            call    gfx_write_v_line
             lbr     wl_done
             
             ; ra.0 is used as steep flag for drawing a sloping line             

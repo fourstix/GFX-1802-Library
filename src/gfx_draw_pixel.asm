@@ -24,13 +24,17 @@
 ;
 ; Set a pixel in the display buffer at position x,y.
 ;
-; Parameters: r7.1 - y (line, 0 to 7)
-;             r7.0 - x (pixel offset, 0 to 7)
-;             r9.1 = color  
+; Parameters: 
+;   r7.1 - y 
+;   r7.0 - x 
+;   r9.1 - color
+;   r9.0 - rotation  
 ;
-; Note: Checks x,y values, returns error if out of bounds
+; Note: 
+;   Checks x,y values, doesn't draw if out of bounds
 ;                  
-; Return: DF = 1 if error, 0 if no error
+; Return: 
+;   DF = 1 if error, 0 if no error
 ; 
 ;-------------------------------------------------------
             proc   gfx_draw_pixel
@@ -38,7 +42,7 @@
             call   gfx_check_bounds
             lbdf   dp_exit    ; exit immediately if out of bounds
 
-            call   gfx_disp_pixel  
+            call   gfx_write_pixel  
 dp_exit:    return
             
             endp

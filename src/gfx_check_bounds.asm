@@ -21,6 +21,7 @@
 ; Parameters: 
 ;   r7.1 - y
 ;   r7.0 - x 
+;   r9.0 - rotation
 ;
 ; Registers Used:
 ;   ra.1 - device height
@@ -38,7 +39,12 @@
             push    ra                ; save size register
             call    gfx_disp_size     ; ra.1 = height, ra.0 = width
 
-            ghi     r7                ; check y value
+            glo     r9                ; get rotation value
+            ani    $03                ; rotation has values 0 to 3
+            shr                       ; check lsb for sideways (r=1 or r=33)
+            lbnf    chk_xy            ; DF = 0, means upright (r=0 or r=2)
+            swap    ra                ; if sideways, swap width and height
+chk_xy:     ghi     r7                ; check y value
             str     r2                ; save in M(X)
             ghi     ra                ; get device height
             sd                        ; y0 >= height is an error
