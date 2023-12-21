@@ -30,19 +30,18 @@ The following methods need to be implemented in a device library that is linked 
 * ra.1 = display height 
 * ra.0 = display width
 * r9.1 = color
-* r9.0 = rotation  
 * r8.0 = line length  
 * r7.1 = origin y (row value, 0 to display height-1)
 * r7.0 = origin x (column value, 0 to display width-1)
 
 <table>
-<tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R8.0</th><th>R9.1</th><th>R9.0</th><th>Returns</th></tr>
-<tr><td rowspan="2">gfx_disp_size</th><td rowspan="2" colspan="5">(No Inputs)</td><td>RA.1 = device height</td></tr>
+<tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R8.0</th><th>R9.1</th><th>Returns</th></tr>
+<tr><td rowspan="2">gfx_disp_size</th><td rowspan="2" colspan="4">(No Inputs)</td><td>RA.1 = device height</td></tr>
 <tr><td>RA.0 = display width</td></tr>
-<tr><td>gfx_disp_clear</th><td colspan="5">(No Inputs)</td><td>DF = 1, if error</td></tr>
-<tr><td>gfx_disp_pixel</td><td>y</td><td>x</td><td> - </td><td>color</td><td> - </td><td>DF = 1, if error</td></tr>
-<tr><td>gfx_disp_h_line</td><td>origin y</td><td>origin x</td><td>length</td><td>color</td><td> - </td><td>DF = 1, if error</td></tr>
-<tr><td>gfx_disp_v_line</td><td>origin y</td><td>origin x</td><td>length</td><td>color</td><td> - </td><td>DF = 1, if error</td></tr>
+<tr><td>gfx_disp_clear</th><td colspan="4">(No Inputs)</td><td>DF = 1, if error</td></tr>
+<tr><td>gfx_disp_pixel</td><td>y</td><td>x</td><td> - </td><td>color</td><td>DF = 1, if error</td></tr>
+<tr><td>gfx_disp_h_line</td><td>origin y</td><td>origin x</td><td>length</td><td>color</td><td>DF = 1, if error</td></tr>
+<tr><td>gfx_disp_v_line</td><td>origin y</td><td>origin x</td><td>length</td><td>color</td><td>DF = 1, if error</td></tr>
 </table>
 
 Graphics Library API
@@ -95,7 +94,7 @@ The methods validate inputs and check boundaries before updating the display buf
 <tr><td>gfx_adj_cursor</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td>rotation</td></tr>
 <tr><td colspan="7">Checks origin x,y values to validate a character can be drawn on the display. The x and y values may be adjusted so the cursor wraps to the next character position.</td></tr>
 <tr><td>gfx_dimensions</td><td> - </td><td> - </td><td> - </td><td> - </td><td> - </td><td>rotation</td></tr>
-<tr><td colspan="7">Returns maximum  x,y values for the rotated dislay, returns RA.1 = Maximum Y (h - 1) and RA.0 = Maximum X (w - 1)</td></tr>
+<tr><td colspan="7">Get the maximum  x,y values for the rotated display. Returns RA.1 = Ymax (h - 1) and RA.0 = Xmax (w - 1)</td></tr>
 </table>
 
 ## Private API List
