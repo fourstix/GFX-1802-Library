@@ -20,3 +20,7 @@
 .op "ABEND","","F8 FF FE D5"
 .op "XCHG","NR","8$1 52 8$2 A$1 F0 A$2 9$1 52 9$2 B$1 F0 B$2"
 .op "SWAP","R","8$1 52 9$1 A$1 F0 B$1"
+.op "SEXT","R","8$1 FE F8 00 C7 F8 FF B$1"
+.op "PUSHD","","73 76 73 7E"
+.op "POPD","","60 72 FE F0"
+.op "SHOWD","","52 64 22 7A C7 7B C4"
