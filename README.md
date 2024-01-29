@@ -112,6 +112,10 @@ The methods validate inputs and check boundaries before updating the display buf
 <tr><td colspan="7">Checks x,y and r values, returns error (DF = 1) if out of bounds</td></tr>
 <tr><td>gfx_draw_arc</td><td>origin y0</td><td> origin x0</td><td> quadrants </td><td>radius r</td><td> - </td><td> - </td></tr>
 <tr><td colspan="7">Checks x,y and r values, returns error (DF = 1) if out of bounds</td></tr>
+<tr><td>gfx_draw_rrect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td> corner radius </td></tr>
+<tr><td colspan="7">Checks origin x,y and r values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
+<tr><td>gfx_fill_rrect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td> corner radius </td></tr>
+<tr><td colspan="7">Checks origin x,y and r values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
 </table>
 
 ## Private API List
@@ -130,13 +134,14 @@ The methods write directly to the display buffer. They may not validate inputs o
 * gfx_write_char    - write data for an ASCII character at x0,y0
 
 ## API Registers:
-* r7.1 = origin y (row value, 0 to device height-1)
-* r7.0 = origin x (column value, 0 to device width-1)
-* r8.1 = endpoint y, or height
-* r8.0 = endpoint x, width or ASCII character 
+* r7.1 = origin y0 (row value, 0 to device height-1)
+* r7.0 = origin x0 (column value, 0 to device width-1)
+* r8.1 = endpoint y1, height or character size
+* r8.0 = endpoint x1, width or ASCII character 
 * r9.1 = color
 * r9.0 = rotation
-* ra.0 = steep flag  
+* ra.1 = endpoint y2
+* ra.0 = steep flag, endpoint x2  
 
 ## GFX API That Call GFX Interface Methods ##
 Public GFX API may call private GFX API methods which, in turn, call one or more of the GFX Interface methods. The table below lists the GFX API methods and the GFX Interface methods they call.
