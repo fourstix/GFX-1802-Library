@@ -8,7 +8,8 @@
 ; Copyright 2012 by Adafruit Industries
 ; Please see https://learn.adafruit.com/adafruit-gfx-graphics-library for more info
 ;-------------------------------------------------------------------------------
-
+#include    ../include/bios.inc
+#include    ../include/kernel.inc
 #include    ../include/ops.inc
 #include    ../include/gfx_display.inc  
 #include    ../include/gfx_def.inc  
@@ -52,7 +53,7 @@
             
             ghi     r8        ; get h for length
             plo     r8        ; set up length of vertical line
-            
+
             ; draw vertical line at x
 wb_loop:    call    gfx_write_v_line   
             lbdf    wb_exit   ; if error, exit immediately

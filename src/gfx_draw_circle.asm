@@ -9,56 +9,53 @@
 ; Please see https://learn.adafruit.com/adafruit-gfx-graphics-library for more info
 ;-------------------------------------------------------------------------------
 
-#include    ../include/bios.inc
-#include    ../include/kernel.inc
 #include    ../include/ops.inc
-#include    ../include/gfx_display.inc
+#include    ../include/gfx_display.inc 
 #include    ../include/gfx_def.inc  
-  
+ 
 
 ;-------------------------------------------------------
-; Public routine - This routine validates the origin
-;   and clips the block to the display edges.
+; Public routine - This routine validate inputs and
+;   then sets pixels to draw a circle.
 ;-------------------------------------------------------
 
 ;-------------------------------------------------------
-; Name: gfx_fill_rect
+; Name: gfx_draw_circle
 ;
-; Set pixels in the display buffer to create a solid 
-; filled rectangle with its upper left corner at the
-; position x,y and sides of width w and height h.
+; Set pixels in the display buffer to draw a circle at 
+; the origin x0, y0 with a radius r.
 ;
 ; Parameters: 
-;   r9.1 - color
 ;   r7.1 - origin y 
-;   r7.0 - origin x
-;   r8.1 - h 
-;   r8.0 - w 
-; 
+;   r7.0 - origin x 
+;   r8.0 - radius r
 ; Registers Used:
-;   rb - origin
-;   ra - dimensions
-;
+;   r8.1 - quadrants to draw
 ; Note: Checks origin x,y values, error if out of bounds
-; and the w, h values may be clipped to edge of display.
 ;                  
 ; Return: DF = 1 if error, 0 if no error
 ;-------------------------------------------------------
-            proc    gfx_fill_rect
+            proc    gfx_draw_circle
+            
+            ;------ make sure origin is within display
             call    gfx_check_bounds
-            lbdf    fr_skip           ; if out bounds, don't draw
-
-            push    r9                ; save registers used
+            lbdf    dc_exit            
+            
+            call    gfx_check_radius
+            lbdf    dc_exit
+            
+            push    r9        ; save registers used in gfx_write_circle
             push    r8
             push    r7
-            
-            call    gfx_adj_bounds    ; adjust w and h, clip if needed
-            lbdf    fr_exit           ; if error, exit immediately
-            
-            call    gfx_write_block   ; draw block
-                    
-fr_exit:    pop     r7                ; restore registers        
+                      
+            ldi     FULL_CIRCLE
+            phi     r8        ; draw all quadrant arcs to make a circle
+            call    gfx_write_arc
+
+            pop     r7        ; restore registers
             pop     r8
             pop     r9
-fr_skip:    return
+
+dc_exit:    return
+            
             endp
