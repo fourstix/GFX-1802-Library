@@ -78,40 +78,40 @@ The methods validate inputs and check boundaries before updating the display buf
 * ra.0 = endpoint x2, corner radius
 
 <table>
-<tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R8.1</th><th>R8.0</th><th>R9.1</th><th>R9.0</th><th>RA.1</th><th>RA.0</th></tr>
-<tr><th colspan="9"> Notes </th></tr>
-<tr><td>gfx_draw_pixel</td><td>y</td><td>x</td><td> - </td><td> - </td><td>color</td><td>rotation</td><td> - </td><td> - </td></tr>
-<tr><td colspan="9">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
-<tr><td>gfx_draw_line</td><td>origin y</td><td> origin x</td><td>endpoint y</td><td>endpoint x</td><td>color</td><td>rotation</td><td> - </td><td> - </td></tr>
-<tr><td colspan="9">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
-<tr><td>gfx_draw_rect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td>rotation</td><td> - </td><td> - </td></tr>
-<tr><td colspan="9">Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
-<tr><td>gfx_fill_rect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td>rotation</td><td> - </td><td> - </td></tr>
-<tr><td colspan="9">Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
-<tr><td>gfx_draw_bitmap</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td>rotation</td><td> - </td><td> - </td></tr>
-<tr><td colspan="9">Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
-<tr><td>gfx_draw_char</td><td>origin y</td><td>origin x</td><td>size</td><td>character</td><td>color</td><td>rotation</td><td> - </td><td> - </td></tr>
-<tr><td colspan="9">Checks origin x,y values, returns error (DF = 1) if out of bounds. Checks ASCII character value, draws DEL (127) if non-printable.<br> Returns: r7 points to next character position.</td></tr>
-<tr><td>gfx_check_bounds</td><td>origin y</td><td> origin x</td><td> - </td><td> - </td><td> - </td><td>rotation</td><td> - </td><td> - </td></tr>
-<tr><td colspan="9">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
-<tr><td>gfx_adj_bounds</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td>rotation</td><td> - </td><td> - </td></tr>
-<tr><td colspan="9">Checks origin x, y, width and height values. The values may be clipped to the edges of display. Returns error (DF = 1) if clipping fails.</td></tr>
-<tr><td>gfx_check_overlap</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td>rotation</td><td> - </td><td> - </td></tr>
-<tr><td colspan="9">Checks origin x,y values, height and width to determine if a graphic overlaps the display, returns error (DF = 1) if no overlap.</td></tr>
-<tr><td>gfx_adj_cursor</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td>rotation</td><td> - </td><td> - </td></tr>
-<tr><td colspan="9">Checks origin x,y values to validate a character can be drawn on the display. The x and y values may be adjusted so the cursor wraps to the next character position.</td></tr>
-<tr><td>gfx_dimensions</td><td> - </td><td> - </td><td> - </td><td> - </td><td> - </td><td> - </td><td> - </td><td> - </td></tr>
-<tr><td colspan="9">Get the maximum  x,y values for the rotated display. Returns RA.1 = Ymax (h - 1) and RA.0 = Xmax (w - 1)</td></tr>
-<tr><td>gfx_draw_triangle</td><td>origin y0</td><td> origin x0</td><td>endpoint x1</td><td>endpoint x1</td><td>color</td><td>rotation</td><td>endpoint x2</td><td>endpoint x1</td></tr>
-<tr><td colspan="9">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
-<tr><td>gfx_fill_triangle</td><td>origin y0</td><td> origin x0</td><td>endpoint x1</td><td>endpoint x1</td><td>color</td><td>rotation</td><td>endpoint x2</td><td>endpoint x1</td></tr>
-<tr><td colspan="9">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
-<tr><td>gfx_draw_circle</td><td>origin y0</td><td> origin x0</td><td> - </td><td>radius r</td><td>color</td><td>rotation</td><td> - </td><td> - </td></tr>
-<tr><td colspan="9">Checks x,y and r values, returns error (DF = 1) if out of bounds</td></tr>
-<tr><td>gfx_fill_circle</td><td>origin y0</td><td> origin x0</td><td> - </td><td>radius r</td><td>color</td><td>rotation</td><td> - </td><td> - </td></tr>
-<tr><td colspan="9">Checks x,y and r values, returns error (DF = 1) if out of bounds</td></tr>
-<tr><td>gfx_draw_arc</td><td>origin y0</td><td> origin x0</td><td> quadrants </td><td>radius r</td><td>color</td><td>rotation</td><td> - </td><td> - </td></tr>
-<tr><td colspan="9">Checks x,y and r values, returns error (DF = 1) if out of bounds</td></tr>
+<tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R8.1</th><th>R8.0</th><th>RA.1</th><th>RA.0</th></tr>
+<tr><th colspan="7"> All functions: R9.1 = color, R9.0 = rotation </th></tr>
+<tr><td>gfx_draw_pixel</td><td>y</td><td>x</td><td> - </td><td> - </td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
+<tr><td>gfx_draw_line</td><td>origin y</td><td> origin x</td><td>endpoint y</td><td>endpoint x</td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
+<tr><td>gfx_draw_rect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
+<tr><td>gfx_fill_rect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
+<tr><td>gfx_draw_bitmap</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
+<tr><td>gfx_draw_char</td><td>origin y</td><td>origin x</td><td>size</td><td>character</td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. Checks ASCII character value, draws DEL (127) if non-printable.<br> Returns: r7 points to next character position.</td></tr>
+<tr><td>gfx_check_bounds</td><td>origin y</td><td> origin x</td><td> - </td><td> - </td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
+<tr><td>gfx_adj_bounds</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks origin x, y, width and height values. The values may be clipped to the edges of display. Returns error (DF = 1) if clipping fails.</td></tr>
+<tr><td>gfx_check_overlap</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks origin x,y values, height and width to determine if a graphic overlaps the display, returns error (DF = 1) if no overlap.</td></tr>
+<tr><td>gfx_adj_cursor</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks origin x,y values to validate a character can be drawn on the display. The x and y values may be adjusted so the cursor wraps to the next character position.</td></tr>
+<tr><td>gfx_dimensions</td><td> - </td><td> - </td><td> - </td><td> - </td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Get the maximum  x,y values for the rotated display. Returns RA.1 = Ymax (h - 1) and RA.0 = Xmax (w - 1)</td></tr>
+<tr><td>gfx_draw_triangle</td><td>origin y0</td><td> origin x0</td><td>endpoint x1</td><td>endpoint x1</td><td>endpoint x2</td><td>endpoint x1</td></tr>
+<tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
+<tr><td>gfx_fill_triangle</td><td>origin y0</td><td> origin x0</td><td>endpoint x1</td><td>endpoint x1</td><td>endpoint x2</td><td>endpoint x1</td></tr>
+<tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
+<tr><td>gfx_draw_circle</td><td>origin y0</td><td> origin x0</td><td> - </td><td>radius r</td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks x,y and r values, returns error (DF = 1) if out of bounds</td></tr>
+<tr><td>gfx_fill_circle</td><td>origin y0</td><td> origin x0</td><td> - </td><td>radius r</td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks x,y and r values, returns error (DF = 1) if out of bounds</td></tr>
+<tr><td>gfx_draw_arc</td><td>origin y0</td><td> origin x0</td><td> quadrants </td><td>radius r</td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks x,y and r values, returns error (DF = 1) if out of bounds</td></tr>
 </table>
 
 ## Private API List
