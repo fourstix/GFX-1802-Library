@@ -41,8 +41,8 @@
             call    gfx_check_bounds
             lbdf    dc_exit            
             
-;            call    gfx_check_radius
-;            lbdf    dc_exit
+            call    gfx_check_radius
+            lbdf    dc_exit
             
             push    r9        ; save registers used in gfx_write_circle
             push    r8

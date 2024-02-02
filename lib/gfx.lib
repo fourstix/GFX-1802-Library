@@ -684,31 +684,34 @@
 {gfx_draw_arc
 /gfx_check_bounds 0001 00
 \gfx_check_bounds 0002
-:0000 d4 00 00 c3 00 24 99 73 89 73 98 73 88 73 97 73
-/gfx_write_arc 0013 00
-\gfx_write_arc 0014
-:0010 87 73 d4 00 00 60 72 a7 f0 b7 60 72 a8 f0 b8 60
-:0020 72 a9 f0 b9 d5
+/gfx_check_radius 0007 00
+\gfx_check_radius 0008
+:0000 d4 00 00 c3 00 2a d4 00 00 c3 00 2a 99 73 89 73
+/gfx_write_arc 0019 00
+\gfx_write_arc 001a
+:0010 98 73 88 73 97 73 87 73 d4 00 00 60 72 a7 f0 b7
+:0020 60 72 a8 f0 b8 60 72 a9 f0 b9 d5
 +0004
++000a
 }
 .big
 {gfx_draw_rrect
 /gfx_check_bounds 0001 00
 \gfx_check_bounds 0002
-:0000 d4 00 00 c3 00 49 9a 73 8a 73 99 73 89 73 98 73
+:0000 d4 00 00 c3 00 4b 9a 73 8a 73 99 73 89 73 98 73
 /gfx_adj_bounds 0017 00
 \gfx_adj_bounds 0018
-:0010 88 73 97 73 87 73 d4 00 00 c3 00 35 8a fe 52 88
-/gfx_write_rrect 002e 00
-\gfx_write_rrect 002f
-:0020 fc 01 f7 cb 00 33 98 fc 01 f7 cb 00 33 d4 00 00
-:0030 c0 00 35 ff 00 60 72 a7 f0 b7 60 72 a8 f0 b8 60
-:0040 72 a9 f0 b9 60 72 aa f0 ba d5
+:0010 88 73 97 73 87 73 d4 00 00 c3 00 37 8a fe 52 88
+:0020 fc 01 f7 cb 00 35 98 fc 01 f7 cb 00 35 fc 00 d4
+/gfx_write_rrect 0030 00
+\gfx_write_rrect 0031
+:0030 00 00 c0 00 37 ff 00 60 72 a7 f0 b7 60 72 a8 f0
+:0040 b8 60 72 a9 f0 b9 60 72 aa f0 ba d5
 +0004
 +001a
 +0024
 +002b
-+0031
++0033
 }
 .big
 {gfx_write_rrect
@@ -717,37 +720,41 @@
 :0020 a7 ad 9a b7 9c 52 8b f7 cb 00 46 bd a8 fc 00 d4
 /gfx_write_h_line 0030 00
 \gfx_write_h_line 0031
-:0030 00 00 c3 00 c8 8d a7 9b 52 9a f4 b7 9d a8 fc 00
+:0030 00 00 c3 00 cf 8d a7 9b 52 9a f4 b7 9d a8 fc 00
 /gfx_write_h_line 0041 00
 \gfx_write_h_line 0042
-:0040 d4 00 00 c3 00 c8 fc 00 8a a7 8c 52 9a f4 b7 ad
+:0040 d4 00 00 c3 00 cf fc 00 8a a7 8c 52 9a f4 b7 ad
 /gfx_write_v_line 005c 00
 \gfx_write_v_line 005d
 :0050 9c 52 9b f7 cb 00 72 a8 bd fc 00 d4 00 00 c3 00
 /gfx_write_v_line 006d 00
 \gfx_write_v_line 006e
-:0060 c8 8b 52 8a f4 a7 8d b7 9d a8 fc 00 d4 00 00 c3
-:0070 00 c8 fc 00 8c 52 8a f4 a7 9a f4 b7 8c a8 f8 01
+:0060 cf 8b 52 8a f4 a7 8d b7 9d a8 fc 00 d4 00 00 c3
+:0070 00 cf fc 00 8c 52 8a f4 a7 9a f4 b7 8c a8 f8 01
 /gfx_write_arc 0082 00
 \gfx_write_arc 0083
-:0080 b8 d4 00 00 8b 52 8a f4 52 8c f5 a7 8c 52 9a f4
-/gfx_write_arc 0097 00
-\gfx_write_arc 0098
-:0090 b7 8c a8 f8 02 b8 d4 00 00 8b 52 8a f4 52 8c f5
-/gfx_write_arc 00af 00
-:00a0 a7 9b 52 9a f4 52 8c f5 b7 8c a8 f8 04 b8 d4 00
-\gfx_write_arc 00b0
-:00b0 00 8c 52 8a f4 a7 9b 52 9a f4 52 8c f5 b7 8c a8
-/gfx_write_arc 00c4 00
-\gfx_write_arc 00c5
-:00c0 f8 08 b8 d4 00 00 fc 00 60 72 aa f0 ba 60 72 ab
-:00d0 f0 bb 60 72 ac f0 bc 60 72 ad f0 bd d5
+:0080 b8 d4 00 00 c3 00 cf 8b 52 8a f4 52 8c f5 a7 8c
+/gfx_write_arc 009a 00
+\gfx_write_arc 009b
+:0090 52 9a f4 b7 8c a8 f8 02 b8 d4 00 00 c3 00 cf 8b
+:00a0 52 8a f4 52 8c f5 a7 9b 52 9a f4 52 8c f5 b7 8c
+/gfx_write_arc 00b5 00
+\gfx_write_arc 00b6
+:00b0 a8 f8 04 b8 d4 00 00 c3 00 cf 8c 52 8a f4 a7 9b
+/gfx_write_arc 00cd 00
+\gfx_write_arc 00ce
+:00c0 52 9a f4 52 8c f5 b7 8c a8 f8 08 b8 d4 00 00 60
+:00d0 72 aa f0 ba 60 72 ab f0 bb 60 72 ac f0 bc 60 72
+:00e0 ad f0 bd d5
 +0029
 +0033
 +0044
 +0055
 +005f
 +0070
++0085
++009d
++00b8
 }
 .big
 {gfx_write_quads

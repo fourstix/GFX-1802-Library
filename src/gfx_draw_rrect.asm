@@ -36,18 +36,17 @@
 ; Return: DF = 1 if error, 0 if no error
 ;-------------------------------------------------------
             proc    gfx_draw_rrect
-                        
+
+          
             ;------ check origin
             call    gfx_check_bounds
-            lbdf    drr_skip          ; if out of bounds, don't draw
-            
+            lbdf    drr_skip          ; if out of bounds, don't draw          
             
             push    ra                ; save registers used
             push    r9
             push    r8
             push    r7
                           
-                                  
             call    gfx_adj_bounds    ; adjust w and h, clip if needed
             lbdf    drr_exit          ; if error, exit immediately
 
@@ -67,8 +66,10 @@
             adi     1                 ; add one so DF = 1 indicates error
             sm                        ;  (h' + 1) - 2r < 0, error
             lbnf    drr_err           ; if 2r > h'+1, exit with error
-                      
+            
+            clc                       ; clear DF after arithmetic          
             call    gfx_write_rrect   ; draw rounded rectangle
+            
             lbr     drr_exit
 
 drr_err:    stc                       ; if h or w is < 2r, exit with error

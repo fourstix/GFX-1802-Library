@@ -153,6 +153,7 @@ corners:    clc               ; clear DF in case skipped left and right lines
             ;--------------------------------------------
              
             call    gfx_write_arc
+            lbdf    wr_done           ; if error, exit immediately
 
             glo     rb        ; get w'
             str     r2        ; save in M(X)
@@ -177,6 +178,7 @@ corners:    clc               ; clear DF in case skipped left and right lines
             ;--------------------------------------------
 
             call    gfx_write_arc
+            lbdf    wr_done           ; if error, exit immediately
 
             glo     rb        ; get w'
             str     r2        ; save in M(X)
@@ -205,6 +207,7 @@ corners:    clc               ; clear DF in case skipped left and right lines
             ;--------------------------------------------
 
             call    gfx_write_arc
+            lbdf    wr_done           ; if error, exit immediately
 
             glo     rc        ; get r
             str     r2        ; save in M(X)
@@ -231,7 +234,6 @@ corners:    clc               ; clear DF in case skipped left and right lines
                
             call    gfx_write_arc
             
-            clc               ; cleaer DF after arithmetic
 wr_done:    pop     ra        ; restore registers
             pop     rb
             pop     rc

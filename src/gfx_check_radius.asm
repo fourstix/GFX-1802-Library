@@ -22,6 +22,7 @@
 ;   r7.0 - origin X0
 ;   r7.1 - origin y0 
 ;   r8.0 - radius r
+;   r8.1 - quadrants
 ;   r9.0 - rotation
 ;
 ; Registers Used:
@@ -57,6 +58,7 @@
             call    gfx_check_bounds  ; check (x1,y1) within bounds
             
             pop     r7                ; restore origin
+
             lbdf    r_done            ; if out of bounds, we are done
 
             push    r7                ; save origin before bounds check     
