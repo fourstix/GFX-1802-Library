@@ -96,7 +96,7 @@ The methods validate inputs and check boundaries before updating the display buf
 <tr><td>gfx_draw_bitmap</td><td>origin y0</td><td> origin x0</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
 <tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
 <tr><td>gfx_draw_char</td><td>origin y0</td><td>origin x0</td><td>size</td><td>character</td><td> - </td><td> - </td></tr>
-<tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. Checks ASCII character value, draws DEL (127) if non-printable. *Note:* Size may be zero on displays that don't support scaling.<br> Returns: r7 points to next character position.</td></tr>
+<tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. Checks ASCII character value, draws DEL (127) if non-printable. Size may be zero on displays that don't support scaling.<br> Returns: r7 points to next character position.</td></tr>
 <tr><td>gfx_check_bounds</td><td>origin y0</td><td> origin x0</td><td> - </td><td> - </td><td> - </td><td> - </td></tr>
 <tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
 <tr><td>gfx_adj_bounds</td><td>origin y0</td><td> origin x0</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
