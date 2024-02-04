@@ -26,6 +26,11 @@ The following methods need to be implemented in a device library that is linked 
 * gfx_disp_h_line - set the data in the memory buffer for a horizontal line.
 * gfx_disp_v_line - set the data in the memory buffer for a vertical line
 
+**Note:**
+* The gfx_disp_clear, gfx_disp_h_line and gfx_disp_v_line methods may call gfx_disp_pixel repeatedly on some displays, or they may implement faster and more efficient algorithms on other displays.
+* The gfx_disp_size method should return the unrotated display height and width.  For a landscape display the width will be greater than the height, but for a portrait display, the height will be greater than the width.
+
+
 ## Interface Registers:
 * ra.1 = display height 
 * ra.0 = display width
