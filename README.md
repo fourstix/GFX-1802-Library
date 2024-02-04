@@ -36,7 +36,7 @@ The following methods need to be implemented in a device library that is linked 
 
 <table>
 <tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R8.0</th><th>R9.1</th><th>Returns</th></tr>
-<tr><td rowspan="2">gfx_disp_size</th><td rowspan="2" colspan="4">(No Inputs)</td><td>RA.1 = device height</td></tr>
+<tr><td rowspan="2">gfx_disp_size</th><td rowspan="2" colspan="4">(No Inputs)</td><td>RA.1 = display height</td></tr>
 <tr><td>RA.0 = display width</td></tr>
 <tr><td>gfx_disp_clear</th><td colspan="4">(No Inputs)</td><td>DF = 1, if error</td></tr>
 <tr><td>gfx_disp_pixel</td><td>y</td><td>x</td><td> - </td><td>color</td><td>DF = 1, if error</td></tr>
@@ -106,6 +106,8 @@ The methods validate inputs and check boundaries before updating the display buf
 <tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
 <tr><td>gfx_fill_triangle</td><td>origin y0</td><td> origin x0</td><td>endpoint x1</td><td>endpoint x1</td><td>endpoint x2</td><td>endpoint x1</td></tr>
 <tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
+<tr><td>gfx_check_radius</td><td>origin y</td><td> origin x</td><td> - </td><td>radius</td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks x,y and r values of a circle, returns error (DF = 1) if the circle defined is out of bounds</td></tr>
 <tr><td>gfx_draw_circle</td><td>origin y0</td><td> origin x0</td><td> - </td><td>radius r</td><td> - </td><td> - </td></tr>
 <tr><td colspan="7">Checks x,y and r values, returns error (DF = 1) if out of bounds</td></tr>
 <tr><td>gfx_fill_circle</td><td>origin y0</td><td> origin x0</td><td> - </td><td>radius r</td><td> - </td><td> - </td></tr>
@@ -131,7 +133,13 @@ The methods write directly to the display buffer. They may not validate inputs o
 * gfx_write_block   - write data to form a filled rectangle with its upper left corner at x0,y0 with width w and height h.
 * gfx_write_bitmap  - write data for a bitmap of width w and height h with its upper left corner at x0,y0.
 * gfx_ascii_font    - ASCII character bitmap patterns
-* gfx_write_char    - write data for an ASCII character at x0,y0
+* gfx_write_char    - write data for an ASCII character, which may be scaled by size s, at x0,y0
+* gfx_write_wedge   - write data to form a filled triangle with endpoints at x0,y0 at x1,y1 and at x2,y2.
+* gfx_write_arc     - write data to form quarter-circle arcs of a circle of radius r at origin x0,y0.
+* gfx_write_quads   - write data to form solid quadrants of a circle of radius r at origin x0,y0.
+* gfx_write_disk    - write data to form a solid circle of radius r at origin x0,y0.
+* gfx_write_rrect   - write data to form a rectangle with its upper left corner at x0,y0 with width w and height h and rounded corners of radius r.
+* gfx_write_oblong  - write data to form a filled rectangle with its upper left corner at x0,y0 with width w and height h and rounded corners of radius r.
 
 ## API Registers:
 * r7.1 = origin y0 (row value, 0 to device height-1)
