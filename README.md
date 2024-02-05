@@ -49,6 +49,13 @@ The following methods need to be implemented in a device library that is linked 
 <tr><td>gfx_disp_v_line</td><td>origin y</td><td>origin x</td><td>length</td><td>color</td><td>DF = 1, if error</td></tr>
 </table>
 
+Rotation
+---------
+
+Rotation will change the co-ordinate system by rotating it by 90, 180 or 270 degrees counter-clockwise.  Rotation values of 0,1,2 and 3 give the number of 90 degree rotations, where 0 means no rotation.  The rotation value only affects the graphics being drawn and does not affect graphics previously drawn.  Generally, one draws all graphics with a rotation value to match the orientation of the display.
+
+The point 0,0 is always considered to be at the upper left of the rotated display.  The display height and width values may change with rotation.  The function gfx_dimensions returns the maximum X value (Xmax = w'-1) and maximum Y value (Ymax  = h'-1) for the rotated display.  Valid co-ordinates for the rotated display are 0 <= x' <= Xmax and 0 <= y' <= Ymax.
+
 Graphics Library API
 ---------------------
 
