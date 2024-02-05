@@ -49,18 +49,16 @@ The following methods need to be implemented in a device library that is linked 
 <tr><td>gfx_disp_v_line</td><td>origin y</td><td>origin x</td><td>length</td><td>color</td><td>DF = 1, if error</td></tr>
 </table>
 
-Rotation
----------
+Graphics Library API
+---------------------
 
+## Rotation
 Rotation will change the co-ordinate system by rotating it by 90, 180 or 270 degrees counter-clockwise.  Rotation values of 0,1,2 and 3 give the number of 90 degree rotations, where 0 means no rotation.  The rotation value only affects the graphics being drawn and does not affect graphics previously drawn.  Generally, one draws all graphics with a rotation value to match the orientation of the display.
 
 The point 0,0 is always considered to be at the upper left of the rotated display.  The display height and width values may change with rotation.  The function gfx_dimensions returns the maximum X value (Xmax = w'-1) and maximum Y value (Ymax  = h'-1) for the rotated display.  Valid co-ordinates for the rotated display are 0 <= x' <= Xmax and 0 <= y' <= Ymax.
 
-Graphics Library API
----------------------
-
 ## Public API List
-The methods validate inputs and check boundaries before updating the display buffer.
+The methods validate inputs and check boundaries before updating the display buffer.  All public API methods have R9.1 as the color parameter and R9.0 as the rotation parameter.
 
 * gfx_draw_pixel    - set a pixel at a particular x,y co-ordinates.
 * gfx_draw_line     - set pixels to form a line from x0,y0 to x1,y1
@@ -133,7 +131,7 @@ The methods validate inputs and check boundaries before updating the display buf
 </table>
 
 ## Private API List
-The methods write directly to the display buffer. They may not validate inputs or check boundaries.  They may consume registers and are meant to be called by one of the public API methods rather than called directly.
+The methods write directly to the display buffer. They may not validate inputs or check boundaries.  They may consume registers and are meant to be called by one of the public API methods rather than called directly. 
 
 * gfx_write_pixel   - write data for a pixel at a particular x,y co-ordinates
 * gfx_write_line    - write data to form a line from x0,y0 to x1,y1
