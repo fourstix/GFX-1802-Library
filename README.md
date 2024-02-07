@@ -29,7 +29,7 @@ The following methods need to be implemented in a device library that is linked 
 **Notes:**     
 * The gfx_disp_clear, gfx_disp_h_line and gfx_disp_v_line methods may call gfx_disp_pixel repeatedly on some displays, or they may implement faster and more efficient algorithms on other displays.
 * The gfx_disp_size method should return the unrotated display height and width.  There is no requirement that one dimension should be larger than the other.  For example for a landscape display the width will be greater than the height, but for a portrait display, the height will be greater than the width.
-* All parameters are to the GFX Display Interface are signed byte values.  Valid ranges are 0 <= y < h-1 and 0 < x < w-1, where h is the diplay height and w is the display width.  Only values within the display boundaries are visible.  
+* All parameters to the GFX Display Interface methods are signed byte values.  Valid co-ordinate ranges are 0 <= y < h-1 and 0 < x < w-1, where h is the diplay height and w is the display width.  Only co-ordinate values within the display boundaries are visible.  
 
 ## Interface Registers:
 * ra.1 = display height 
@@ -55,7 +55,7 @@ Graphics Library API
 ## Rotation
 Rotation will change the co-ordinate system by rotating it by 90, 180 or 270 degrees counter-clockwise.  Rotation values of 0,1,2 and 3 give the number of 90 degree rotations, where 0 means no rotation.  The rotation value only affects the graphics being drawn and does not affect graphics previously drawn.  Generally, one draws all graphics with a rotation value to match the orientation of the display.
 
-The point 0,0 is always considered to be at the upper left of the rotated display.  The display height and width values may change with rotation.  The function gfx_dimensions returns the maximum X value (Xmax = w'-1) and maximum Y value (Ymax  = h'-1) for the rotated display, where h' is the rotated height and w' is the rotated width.  Valid co-ordinates for the rotated display are 0 <= x' <= Xmax and 0 <= y' <= Ymax, where x' and y' are the rotated co-ordinate values.
+The point 0,0 is always considered to be at the upper left of the rotated display.  The display height and width values may change with rotation.  The function gfx_dimensions returns the maximum X value (Xmax = w'-1) and maximum Y value (Ymax  = h'-1) for the rotated display, where h' is the rotated display height and w' is the rotated display width.  Valid co-ordinate ranges for the rotated display are 0 <= x' <= Xmax and 0 <= y' <= Ymax, where x' and y' are the rotated co-ordinate values.
 
 ## Public API List
 The methods validate inputs and check boundaries before updating the display buffer.  All public API methods have R9.1 as the color parameter and R9.0 as the rotation parameter.  All parameters to the public API methods are signed byte values.  The pubiic API methods validate or clip the rotated parameter values before eventually calling one of the GFX Interface methods to draw to the display.
