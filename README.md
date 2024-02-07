@@ -58,7 +58,7 @@ Rotation will change the co-ordinate system by rotating it by 90, 180 or 270 deg
 The point 0,0 is always considered to be at the upper left of the rotated display.  The display height and width values may change with rotation.  The function gfx_dimensions returns the maximum X value (Xmax = w'-1) and maximum Y value (Ymax  = h'-1) for the rotated display, where h' is the rotated display height and w' is the rotated display width.  Valid co-ordinate ranges for the rotated display are 0 <= x' <= Xmax and 0 <= y' <= Ymax, where x' and y' are the rotated co-ordinate values.
 
 ## Public API List
-The methods validate inputs and check boundaries before updating the display buffer.  All public API methods have R9.1 as the color parameter and R9.0 as the rotation parameter.  All parameters to the public API methods are signed byte values.  The pubiic API methods validate or clip the rotated parameter values before eventually calling one of the GFX Interface methods to draw to the display.
+The methods validate inputs and check boundaries before calling other methods to update the display buffer.  All public API methods have R9.1 as the color parameter and R9.0 as the rotation parameter.  All parameters to the public API methods are signed byte values.  The pubiic API methods validate or clip the rotated parameter values before calling other methods to draw to the display.
 
 * gfx_draw_pixel    - set a pixel at a particular x,y co-ordinates.
 * gfx_draw_line     - set pixels to form a line from x0,y0 to x1,y1
@@ -131,7 +131,7 @@ The methods validate inputs and check boundaries before updating the display buf
 </table>
 
 ## Private API List
-The methods write directly to the display buffer. They may not validate inputs or check boundaries.  They may consume registers and are meant to be called by one of the public API methods rather than called directly. 
+These methods can write to the display buffer through the GFX Interface metionds. They may not validate inputs or check boundaries.  They may consume registers and are meant to be called by one of the public API methods rather than called directly. 
 
 * gfx_write_pixel   - write data for a pixel at a particular x,y co-ordinates
 * gfx_write_line    - write data to form a line from x0,y0 to x1,y1
