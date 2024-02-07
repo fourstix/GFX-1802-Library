@@ -73,6 +73,7 @@ The methods validate inputs and check boundaries before calling other methods to
 * gfx_dimensions    - get the maximum x,y values for the rotated display
 * gfx_draw_triangle - set pixels to form a triangle
 * grx_fill_triangle - set pixels to form a solid triangle
+* gfx_check_radius  - validate that the x,y and r co-ordinates define a circle at the origin x0, y0 with a radius r within the display height and width.
 * gfx_draw_circle   - set pixels to form a circle at the origin x0, y0 with a radius r
 * gfx_fill_circle   - set pixels to fill a solid circle at the origin x0, y0 with a radius r
 * gfx_draw_arc      - draw quadrants of a circular arc at the origin x0, y0 with a radius r
