@@ -8,7 +8,6 @@
 ; Copyright 2012 by Adafruit Industries
 ; Please see https://learn.adafruit.com/adafruit-gfx-graphics-library for more info
 ;-------------------------------------------------------------------------------
-
 #include    ../include/ops.inc
 #include    ../include/gfx_display.inc
 #include    ../include/gfx_def.inc  
@@ -31,14 +30,17 @@
 ;   r7.0 - origin x  (signed byte)
 ;   r9.1 - color
 ;   r9.0 - rotation
+;   r8.1 - character scale factor
 ;   r8.0 - character to write
 ;
 ; Registers Used:
 ;   rf   - pointer to char bitmap (five data bytes)
 ;   rc.1 - shifted data byte
-;   rc.0 - outer byte counter, temp offset 
-;   r8.0 - inner bit counter, index register
-;   r8.1 - origin y value, index register
+;   rc.0 - outer byte counter, temp offset
+;   ra.1 - scale flag (0 or 1)
+;   ra.0 - scale value (2 to 8) 
+;   rb.0 - inner bit counter, index register
+;   rb.1 - origin y value, index register
 ;
 ; Return: (None) - r8, r9 consumed
 ;-------------------------------------------------------
@@ -46,13 +48,25 @@
             
             push    rf        ; save font character pointer
             push    rc        ; save counter
+            push    rb        ; save scratch register
+            push    ra        ; save scale register
             
             ;---- set rf to base of font table
-            load    rf, gfx_ascii_font   
+            load    rf, gfx_ascii_font
             
+            ;---- set up default values for no scale
+            load    ra, $0001   ; scale flag false, delta value of 1               
+            
+            ghi     r8          ; get character scale value
+            lbz     no_scale
+
+            plo     ra          ; save character scale value in ra.0
+            ldi     $01 
+            phi     ra          ; set scale flag in ra.1 to true
+              
             ;---- set up scratch register as index register
-            ldi      0          ; clear high byte of index
-            phi     r8        
+no_scale:   ldi      0          ; clear high byte of index
+            phi     rb        
                 
             ;---- convert character to offset 
             glo     r8          ; get character
@@ -68,29 +82,29 @@ char_ok:    glo     r8
             
             ldi     0           ; print space for all control characters                
 
-set_offset: plo     r8          ; put offset into index register
+set_offset: plo     rb          ; put offset into index register
             plo     rc          ; save temp char offset for add
   
             ;---- each character is 5 bytes so multply offset by 5 (4+1)
-            SHL16   r8          ; shift index twice to multiply by 4
-            SHL16   r8          ; r8 = 4*offset
+            SHL16   rb          ; shift index twice to multiply by 4
+            SHL16   rb          ; rb = 4*offset
             glo     rc          ; get offset value
             str     r2          ; put offset in M(X) for add
-            glo     r8          ; get index register lo byte
+            glo     rb          ; get index register lo byte
             add                 ; add offset to lo byte
-            plo     r8          ; save lo byte
-            ghi     r8          ; 4*offset + offset = 5*offset
+            plo     rb          ; save lo byte
+            ghi     rb          ; 4*offset + offset = 5*offset
             adci     0          ; update hi byte with carry flag
-            phi     r8          ; r8 = 5 * offset
+            phi     rb          ; rb = 5 * offset
             
-            ADD16   rf, r8      ; rf now points to character data in table
+            ADD16   rf, rb      ; rf now points to character data in table
                                             
             ;---- set up byte counter            
             ldi      5          ; 5 bytes in font table for character
             plo     rc          ; set up outer counter in rc.0
 
             ghi     r7          ; save copy of y origin
-            phi     r8  
+            phi     rb  
             
             ;-------------------------------------------------------------------
             ; Each font consists of five data bytes which represent bits
@@ -107,43 +121,60 @@ shft_font:  glo     rc          ; check outer counter
 
                         
             ldi      8          ; set up inner bit counter
-            plo     r8          ; 8 bits per font byte
+            plo     rb          ; 8 bits per font byte
             
             ;---- inner loop to shift font byte
-shft_bits:  glo     r8          ; check shift value count
+shft_bits:  glo     rb          ; check shift value count
             lbz     shft_done
             
             ghi     rc          ; get data byte
             shr                 ; shift lsb into DF
             phi     rc          ; save shifted font data byte
-            lbnf    no_draw     ; if bit is zero, don't draw anything
+            lbnf    wc_cont     ; if bit is zero, don't draw anything
             
             call    gfx_check_bounds
-            lbdf    no_draw     ; if out of bounds, don't draw it
-  
+            lbdf    wc_cont     ; if out of bounds, don't draw it
+            
+            ghi     ra          ; check char scale flag
+            lbz     thin_char
+                            
+            glo     ra          ; draw square instead of single pixel
+            plo     r8          ; w = scale value
+            phi     r8          ; h = scale value
+                        
+            call    gfx_fill_rect   
+
+            lbr     wc_cont     ; continue
+            
             ;---- bytes represent font columns (vertical font data)
-            call    gfx_write_pixel
+thin_char:  call   gfx_write_pixel              
               
-no_draw:    dec     r8          ; count down
+wc_cont:    dec     rb          ; count down
             ghi     r7          ; increment y value for next bit
-            adi      1          ; signed byte add
+            str     r2          ; save in M(X)
+            glo     ra          ; get scale value to add
+            add
             phi     r7          ; save updated y 
             lbr     shft_bits   ; keep going until done
 
             
             ;---- inner loop done                        
-shft_done:  ghi     r8          ; reset y back to origin for next byte
+shft_done:  ghi     rb          ; reset y back to origin for next byte
             phi     r7          ; reset pixel y value
             
             glo     r7          ; increment x value for next byte
-            adi      1          ; signed byte add
-            plo     r7          ; update pixel x value for next byte 
+            str     r2          ; save in M(X)
+            glo     ra          ; get scale value to add
+            add            
+            plo     r7          ; update x value for next byte 
             
             ;---- outer loop counter
             dec     rc          ; count down character bytes
             lbr     shft_font   ; keep going until all 5 bytes done
                         
-char_done:  pop     rc          ; restore registers
+char_done:  pop     ra          ; restore registers
+            pop     rb
+            pop     rc
             pop     rf
             clc                 ; clear DF because of arithmetic
             return

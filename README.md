@@ -26,6 +26,11 @@ The following methods need to be implemented in a device library that is linked 
 * gfx_disp_h_line - set the data in the memory buffer for a horizontal line.
 * gfx_disp_v_line - set the data in the memory buffer for a vertical line
 
+**Notes:**     
+* The gfx_disp_clear, gfx_disp_h_line and gfx_disp_v_line methods may call gfx_disp_pixel repeatedly on some displays, or they may implement faster and more efficient algorithms on other displays.
+* The gfx_disp_size method should return the unrotated display height and width.  There is no requirement that one dimension should be larger than the other.  For example for a landscape display the width will be greater than the height, but for a portrait display, the height will be greater than the width.
+* All parameters to the GFX Display Interface methods are signed byte values.  Valid co-ordinate ranges are 0 <= y < h-1 and 0 < x < w-1, where h is the diplay height and w is the display width.  Only co-ordinate values within the display boundaries are visible.  
+
 ## Interface Registers:
 * ra.1 = display height 
 * ra.0 = display width
@@ -36,7 +41,7 @@ The following methods need to be implemented in a device library that is linked 
 
 <table>
 <tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R8.0</th><th>R9.1</th><th>Returns</th></tr>
-<tr><td rowspan="2">gfx_disp_size</th><td rowspan="2" colspan="4">(No Inputs)</td><td>RA.1 = device height</td></tr>
+<tr><td rowspan="2">gfx_disp_size</th><td rowspan="2" colspan="4">(No Inputs)</td><td>RA.1 = display height</td></tr>
 <tr><td>RA.0 = display width</td></tr>
 <tr><td>gfx_disp_clear</th><td colspan="4">(No Inputs)</td><td>DF = 1, if error</td></tr>
 <tr><td>gfx_disp_pixel</td><td>y</td><td>x</td><td> - </td><td>color</td><td>DF = 1, if error</td></tr>
@@ -47,58 +52,86 @@ The following methods need to be implemented in a device library that is linked 
 Graphics Library API
 ---------------------
 
+## Rotation
+Rotation will change the co-ordinate system by rotating it by 90, 180 or 270 degrees counter-clockwise.  Rotation values of 0,1,2 and 3 give the number of 90 degree rotations, where 0 means no rotation.  The rotation value only affects the graphics being drawn and does not affect graphics previously drawn.  Generally, one draws all graphics with a rotation value to match the orientation of the display.
+
+The point 0,0 is always considered to be at the upper left of the rotated display.  The display height and width values may change with rotation.  The function gfx_dimensions returns the maximum X value (Xmax = w'-1) and maximum Y value (Ymax  = h'-1) for the rotated display, where h' is the rotated display height and w' is the rotated display width.  Valid co-ordinate ranges for the rotated display are 0 <= x' <= Xmax and 0 <= y' <= Ymax, where x' and y' are the rotated co-ordinate values.
+
 ## Public API List
-The methods validate inputs and check boundaries before updating the display buffer.
+The methods validate inputs and check boundaries before updating the display buffer.  All public API methods have R9.1 as the color parameter and R9.0 as the rotation parameter.  All parameters to the public API methods are signed byte values.  The pubiic API methods validate or clip the rotated parameter values before eventually calling one of the GFX Interface methods to draw to the display.
 
 * gfx_draw_pixel    - set a pixel at a particular x,y co-ordinates.
 * gfx_draw_line     - set pixels to form a line from x0,y0 to x1,y1
 * gfx_draw_rect     - set pixels to form a rectangle with its upper left corner at x0,y0 with width w and height h.
 * gfx_fill_rect     - set pixels to form a filled rectangle with its upper left corner at x0,y0 with width w and height h.
 * gfx_draw_bitmap   - set pixels to draw a bitmap of width w and height h with its upper left corner at x0,y0.
-* gfx_draw_char     - draw a character at x0,y0
+* gfx_draw_char     - draw a character, which may be scaled by size s, at x0,y0
 * gfx_check_bounds  - validate that x,y co-ordinates are within the display height and width.
 * gfx_adj_bounds    - adjust the x,y co-ordinates to remain within the display height and width.
 * gfx_check_overlap - validate that x,y co-ordinates and height and width are within the display height and width.
 * gfx_adj_cursor    - adjust the x,y co-ordinates, if needed, so the next character is drawn entirely within the display height and width.
 * gfx_dimensions    - get the maximum x,y values for the rotated display
+* gfx_draw_triangle - set pixels to form a triangle
+* grx_fill_triangle - set pixels to form a solid triangle
+* gfx_draw_circle   - set pixels to form a circle at the origin x0, y0 with a radius r
+* gfx_fill_circle   - set pixels to fill a solid circle at the origin x0, y0 with a radius r
+* gfx_draw_arc      - draw quadrants of a circular arc at the origin x0, y0 with a radius r
 
 ## API Registers:
-* r7.1 = origin y (row value, 0 to device height-1)
-* r7.0 = origin x (column value, 0 to device width-1)
-* r8.1 = endpoint y, or height
-* r8.0 = endpoint x, width or ASCII character
+* r7.1 = origin y0 (row value, 0 to device height-1)
+* r7.0 = origin x0 (column value, 0 to device width-1)
+* r8.1 = endpoint y1, height, character size
+* r8.0 = endpoint x1, width, ASCII character, radius
 * r9.1 = color
 * r9.0 = rotation  
+* ra.1 = endpoint y2
+* ra.0 = endpoint x2, corner radius
 
 <table>
-<tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R8.1</th><th>R8.0</th><th>R9.1</th><th>R9.0</th></tr>
-<tr><th colspan="7">Notes</th></tr>
-<tr><td>gfx_draw_pixel</td><td>y</td><td>x</td><td> - </td><td> - </td><td>color</td><td>rotation</td></tr>
+<tr><th>Name</th><th>R7.1</th><th>R7.0</th><th>R8.1</th><th>R8.0</th><th>RA.1</th><th>RA.0</th></tr>
+<tr><th colspan="7"> All functions: R9.1 = color, R9.0 = rotation </th></tr>
+<tr><td>gfx_draw_pixel</td><td>y</td><td>x</td><td> - </td><td> - </td><td> - </td><td> - </td></tr>
 <tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
-<tr><td>gfx_draw_line</td><td>origin y</td><td> origin x</td><td>endpoint y</td><td>endpoint x</td><td>color</td><td>rotation</td></tr>
+<tr><td>gfx_draw_line</td><td>origin y0</td><td> origin x0</td><td>endpoint y1</td><td>endpoint x1</td><td> - </td><td> - </td></tr>
 <tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
-<tr><td>gfx_draw_rect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td>rotation</td></tr>
+<tr><td>gfx_draw_rect</td><td>origin y0</td><td> origin x0</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
 <tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
-<tr><td>gfx_fill_rect</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td>rotation</td></tr>
+<tr><td>gfx_fill_rect</td><td>origin y0</td><td> origin x0</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
 <tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
-<tr><td>gfx_draw_bitmap</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td>rotation</td></tr>
+<tr><td>gfx_draw_bitmap</td><td>origin y0</td><td> origin x0</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
 <tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
-<tr><td>gfx_draw_char</td><td>origin y</td><td>origin x</td><td> - </td><td>character</td><td>color</td><td>rotation</td></tr>
-<tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. Checks ASCII character value, draws DEL (127) if non-printable.<br> Returns: r7 points to next character position.</td></tr>
-<tr><td>gfx_check_bounds</td><td>origin y</td><td> origin x</td><td> - </td><td> - </td><td> - </td><td>rotation</td></tr>
+<tr><td>gfx_draw_char</td><td>origin y0</td><td>origin x0</td><td>size</td><td>character</td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks origin x,y values, returns error (DF = 1) if out of bounds. Checks ASCII character value, draws DEL (127) if non-printable. Size may be zero on displays that don't support scaling.<br> Returns: r7 points to next character position.</td></tr>
+<tr><td>gfx_check_bounds</td><td>origin y0</td><td> origin x0</td><td> - </td><td> - </td><td> - </td><td> - </td></tr>
 <tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
-<tr><td>gfx_adj_bounds</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td>rotation</td></tr>
+<tr><td>gfx_adj_bounds</td><td>origin y0</td><td> origin x0</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
 <tr><td colspan="7">Checks origin x, y, width and height values. The values may be clipped to the edges of display. Returns error (DF = 1) if clipping fails.</td></tr>
-<tr><td>gfx_check_overlap</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td>color</td><td>rotation</td></tr>
+<tr><td>gfx_check_overlap</td><td>origin y0</td><td> origin x0</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
 <tr><td colspan="7">Checks origin x,y values, height and width to determine if a graphic overlaps the display, returns error (DF = 1) if no overlap.</td></tr>
-<tr><td>gfx_adj_cursor</td><td>origin y</td><td> origin x</td><td>height</td><td>width</td><td> - </td><td>rotation</td></tr>
+<tr><td>gfx_adj_cursor</td><td>origin y0</td><td> origin x0</td><td>height</td><td>width</td><td> - </td><td> - </td></tr>
 <tr><td colspan="7">Checks origin x,y values to validate a character can be drawn on the display. The x and y values may be adjusted so the cursor wraps to the next character position.</td></tr>
-<tr><td>gfx_dimensions</td><td> - </td><td> - </td><td> - </td><td> - </td><td> - </td><td>rotation</td></tr>
-<tr><td colspan="7">Get the maximum  x,y values for the rotated display. Returns RA.1 = Ymax (h - 1) and RA.0 = Xmax (w - 1)</td></tr>
+<tr><td>gfx_dimensions</td><td> - </td><td> - </td><td> - </td><td> - </td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Get the maximum  x,y values for the rotated display. Returns RA.1 = Ymax (h' - 1) and RA.0 = Xmax (w' - 1)</td></tr>
+<tr><td>gfx_draw_triangle</td><td>origin y0</td><td> origin x0</td><td>endpoint y1</td><td>endpoint x1</td><td>endpoint y2</td><td>endpoint x2</td></tr>
+<tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
+<tr><td>gfx_fill_triangle</td><td>origin y0</td><td> origin x0</td><td>endpoint y1</td><td>endpoint x1</td><td>endpoint y2</td><td>endpoint x2</td></tr>
+<tr><td colspan="7">Checks x,y values, returns error (DF = 1) if out of bounds</td></tr>
+<tr><td>gfx_check_radius</td><td>origin y0</td><td> origin x0</td><td> - </td><td>radius</td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks x,y and r values of a circle, returns error (DF = 1) if the circle defined is out of bounds</td></tr>
+<tr><td>gfx_draw_circle</td><td>origin y0</td><td> origin x0</td><td> - </td><td>radius r</td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks x,y and r values, returns error (DF = 1) if out of bounds</td></tr>
+<tr><td>gfx_fill_circle</td><td>origin y0</td><td> origin x0</td><td> - </td><td>radius r</td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks x,y and r values, returns error (DF = 1) if out of bounds</td></tr>
+<tr><td>gfx_draw_arc</td><td>origin y0</td><td> origin x0</td><td>quadrants</td><td>radius r</td><td> - </td><td> - </td></tr>
+<tr><td colspan="7">Checks x,y and r values, returns error (DF = 1) if out of bounds</td></tr>
+<tr><td>gfx_draw_rrect</td><td>origin y0</td><td> origin x0</td><td>height</td><td>width</td><td> - </td><td>corner radius</td></tr>
+<tr><td colspan="7">Checks origin x,y and r values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
+<tr><td>gfx_fill_rrect</td><td>origin y0</td><td> origin x0</td><td>height</td><td>width</td><td> - </td><td>corner radius</td></tr>
+<tr><td colspan="7">Checks origin x,y and r values, returns error (DF = 1) if out of bounds. The w and h values may be clipped to edge of display.</td></tr>
 </table>
 
 ## Private API List
-The methods write directly to the display buffer. They may not validate inputs or check boundaries.  They may consume registers and are meant to be called by one of the public API methods rather than called directly.
+The methods write directly to the display buffer. They may not validate inputs or check boundaries.  They may consume registers and are meant to be called by one of the public API methods rather than called directly. 
 
 * gfx_write_pixel   - write data for a pixel at a particular x,y co-ordinates
 * gfx_write_line    - write data to form a line from x0,y0 to x1,y1
@@ -110,16 +143,23 @@ The methods write directly to the display buffer. They may not validate inputs o
 * gfx_write_block   - write data to form a filled rectangle with its upper left corner at x0,y0 with width w and height h.
 * gfx_write_bitmap  - write data for a bitmap of width w and height h with its upper left corner at x0,y0.
 * gfx_ascii_font    - ASCII character bitmap patterns
-* gfx_write_char    - write data for an ASCII character at x0,y0
+* gfx_write_char    - write data for an ASCII character, which may be scaled by size s, at x0,y0
+* gfx_write_wedge   - write data to form a filled triangle with endpoints at x0,y0 at x1,y1 and at x2,y2.
+* gfx_write_arc     - write data to form quarter-circle arcs of a circle of radius r at origin x0,y0.
+* gfx_write_quads   - write data to form solid quadrants of a circle of radius r at origin x0,y0.
+* gfx_write_disk    - write data to form a solid circle of radius r at origin x0,y0.
+* gfx_write_rrect   - write data to form a rectangle with its upper left corner at x0,y0 with width w and height h and rounded corners of radius r.
+* gfx_write_oblong  - write data to form a filled rectangle with its upper left corner at x0,y0 with width w and height h and rounded corners of radius r.
 
 ## API Registers:
-* r7.1 = origin y (row value, 0 to device height-1)
-* r7.0 = origin x (column value, 0 to device width-1)
-* r8.1 = endpoint y, or height
-* r8.0 = endpoint x, width or ASCII character 
+* r7.1 = origin y0 (row value, 0 to device height-1)
+* r7.0 = origin x0 (column value, 0 to device width-1)
+* r8.1 = endpoint y1, height or character size
+* r8.0 = endpoint x1, width or ASCII character 
 * r9.1 = color
 * r9.0 = rotation
-* ra.0 = steep flag  
+* ra.1 = endpoint y2
+* ra.0 = steep flag, endpoint x2 or corner radius  
 
 ## GFX API That Call GFX Interface Methods ##
 Public GFX API may call private GFX API methods which, in turn, call one or more of the GFX Interface methods. The table below lists the GFX API methods and the GFX Interface methods they call.

@@ -8,7 +8,6 @@
 ; Copyright 2012 by Adafruit Industries
 ; Please see https://learn.adafruit.com/adafruit-gfx-graphics-library for more info
 ;-------------------------------------------------------------------------------
-
 #include    ../include/ops.inc
 #include    ../include/gfx_display.inc  
 #include    ../include/gfx_def.inc  

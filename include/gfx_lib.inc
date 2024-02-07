@@ -18,6 +18,14 @@
 #define ROTATE_360    0
 #define ROTATE_NONE   0
 
+;-----------------------------------
+; Constants for drawing Arcs
+;-----------------------------------
+#define NW_QUAD       $01
+#define NE_QUAD       $02
+#define SE_QUAD       $04
+#define SW_QUAD       $08
+
 ;-------------------------------------------------------------------------------
 ; Public GFX Library Routines
 ;-------------------------------------------------------------------------------
@@ -32,4 +40,10 @@
             extrn   gfx_adj_bounds
             extrn   gfx_adj_cursor
             extrn   gfx_dimensions
-            
+            extrn   gfx_draw_triangle
+            extrn   gfx_fill_triangle
+            extrn   gfx_draw_circle
+            extrn   gfx_draw_arc
+            extrn   gfx_draw_rrect
+            extrn   gfx_fill_circle
+            extrn   gfx_fill_rrect  

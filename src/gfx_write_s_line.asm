@@ -35,9 +35,9 @@
 ; Return: (None) r7, r8, r9 - consumed
 ;-------------------------------------------------------
             proc   gfx_write_s_line
-            push   rb       ; save dx, dy register
+            push   rd       ; save x,y register
             push   rc       ; save error, Ystep register       
-            push   rd       ; save x,y register 
+            push   rb       ; save dx, dy register 
 
 ;-------------------------------------------------------------------------------
 ;  The following values are used in Bresenham's algorithm 

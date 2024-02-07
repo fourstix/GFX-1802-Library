@@ -29,6 +29,30 @@
 #define ROTATE_NONE   0
 
 
+;-----------------------------------
+; Constants for drawing Arcs
+;-----------------------------------
+#define NW_QUAD       $01
+#define NE_QUAD       $02
+#define SE_QUAD       $04
+#define SW_QUAD       $08
+#define FULL_CIRCLE   $0F 
+
+;-----------------------------------
+; Constants for filling Circles
+;-----------------------------------
+#define RIGHT_SIDE    $01
+#define LEFT_SIDE     $02
+#define BOTH_SIDES    $03    
+
+;-----------------------------------
+; Public Text constants
+;-----------------------------------
+#define GFX_TXT_NORMAL    $01
+#define GFX_TXT_INVERSE   $00
+#define GFX_TXT_OVERLAY   $80
+
+
 ;-------------------------------------------------------------------------------
 ; Graphics routines used by other GFX library routines
 ;-------------------------------------------------------------------------------
@@ -48,3 +72,16 @@
             extrn   gfx_write_line 
             extrn   gfx_check_cursor
             extrn   gfx_adj_cursor
+            extrn   gfx_fill_rect
+            extrn   gfx_write_wedge
+            extrn   gfx_math_mul8
+            extrn   gfx_math_div8
+            extrn   gfx_write_circle
+            extrn   gfx_dimensions
+            extrn   gfx_check_radius  
+            extrn   gfx_write_arc
+            extrn   gfx_write_disk
+            extrn   gfx_write_quads
+            extrn   gfx_write_rrect          
+            extrn   gfx_write_oblong          
+            extrn   gfx_debug

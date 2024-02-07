@@ -43,8 +43,9 @@
             proc    gfx_adj_bounds
             push    ra                ; save size register
             push    r7
+
             call    gfx_disp_size     ; ra.1 = device height, ra.0 = device width
-            
+
             glo     r9                ; get rotation value (r)
             ani    $03                ; rotation has values 0 to 3
             shr                       ; check lsb for sideways (r=1 or r=3)
@@ -102,9 +103,11 @@ check_w:    glo     r8                ; check w
             lbdf    clip_done         ; w' should be positve        
 
 bad_clip:   stc                       ; otherwise, exit with error
+
             lbr     clip_exit
 
 clip_done:  clc                       ; clear df (no error)
+
 clip_exit:  pop     r7                ; restore origin
             pop     ra                ; restore size register
             return

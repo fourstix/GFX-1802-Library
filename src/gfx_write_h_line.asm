@@ -8,7 +8,6 @@
 ; Copyright 2012 by Adafruit Industries
 ; Please see https://learn.adafruit.com/adafruit-gfx-graphics-library for more info
 ;-------------------------------------------------------------------------------
-
 #include    ../include/ops.inc
 #include    ../include/gfx_display.inc  
 #include    ../include/gfx_def.inc  
@@ -158,10 +157,13 @@ whl_r180:   call  gfx_disp_size     ; get display size
             ;---- draw horizontal line after rotation
 
 whl_hline:  clc                     ; clear DF after arithmetic
+
             call  gfx_disp_h_line   ; draw rotated line as horizontal line
+
             lbr   whl_exit
                         
 whl_vline:  clc                     ; clear DF after arithmetic
+
             call  gfx_disp_v_line   ; draw rotated line as vertical line
 
 whl_exit:   pop   r7                ; restore registers
