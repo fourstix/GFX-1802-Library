@@ -15,6 +15,7 @@ Supported Displays
 * [SH1106 OLED display](https://github.com/fourstix/Elfos-SPI-OLED-Drivers#sh1106-display-pinout)
 * [SSD1306 OLED display](https://github.com/fourstix/Elfos-SPI-OLED-Drivers#ssd1306-display-pinout)
 * [SSD1309 OLED display](https://github.com/fourstix/Elfos-SPI-OLED-Drivers#ssd1309-display-pinout)
+* [CDP1861 Pixie Video display](https://github.com/fourstix/Elfos-GFX-Pixie-Video)
 
 GFX Display Interface
 ---------------------
